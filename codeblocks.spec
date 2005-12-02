@@ -105,11 +105,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/codeblocks
 %attr(755,root,root) %{_bindir}/console_runner
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-#{_datadir}/application-registry/codeblocks.applications
-#{_datadir}/applications/codeblocks.desktop
-#{_datadir}/icons/gnome/48x48/mimetypes/gnome-mime-application-x-codeblocks.png
-#{_datadir}/mime-info/*
-#{_datadir}/mime/packages/codeblocks.xml
-#{_datadir}/pixmaps/codeblocks.png
-#define pkgdata %{_datadir}/%{name}
-#{pkgdata}/*
+%{_desktopdir}/*.desktop
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/*.zip
+%{_datadir}/%{name}/*.txt
+%{_datadir}/%{name}/icons
+%{_datadir}/%{name}/images
+%{_datadir}/%{name}/lexers
+%{_datadir}/%{name}/templates
+# TODO!
+%dir %{_datadir}/%{name}/plugins
+%attr(755,root,root) %{_datadir}/%{name}/plugins/*.so
