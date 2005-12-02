@@ -1,19 +1,23 @@
+#
+# TODO:
+#		- move plugins to libdir/name/...
+#
 Summary:	An open source, cross platform, free C++ IDE
 Name:		codeblocks
 Version:	1.0
 %define		_rc	rc2
-Release:	0.%{_rc}.0.1
+Release:	0.%{_rc}.0.2
 License:	GPL
 Group:		Development/Languages
 Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
-# Source0-md5:	0
+# Source0-md5:	425c700feb77d22b1b85b1061d2504d9
 URL:		http://www.codeblocks.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dos2unix
 BuildRequires:	libtool
 BuildRequires:	wxGTK2-devel
-BuildRequires:	wxWindows-devel
+BuildRequires:	wxWidgets-devel
 BuildRequires:	zip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
