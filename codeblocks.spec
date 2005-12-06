@@ -3,6 +3,7 @@
 #		- move plugins to libdir/name/...
 #
 Summary:	An open source, cross platform, free C++ IDE
+Summary(pl):	Wieloplatformowe, darmowe IDE do C++ o otwartych ¼ród³ach
 Name:		codeblocks
 Version:	1.0
 %define		_rc	rc2
@@ -16,8 +17,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dos2unix
 BuildRequires:	libtool
-BuildRequires:	wxGTK2-devel
-BuildRequires:	wxWidgets-devel
+BuildRequires:	wxGTK2-devel >= 2.6.0
 BuildRequires:	zip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -28,49 +28,82 @@ to be extensible and configurable. Built around a plugin framework,
 Code::Blocks can be extended with plugin DLLs. It includes a plugin
 wizard so you can compile your own plugins!
 
-Features:
-
 Highlights:
-
-     - Open Source! GPL2, no hidden costs.
-     - Cross-platform. Runs on Linux or Windows (uses wxWidgets).
-     - Made in GNU C++. No interpreted languages or proprietary libs
-       needed.
-     - Comes in two presentations: Standalone, and MinGW bundle
-     - Devpack support (optional)
-     - Extensible thru plugins (SDK available in the downloads section)
+ - Open Source! GPL 2, no hidden costs
+ - Cross-platform; runs on Linux or Windows (uses wxWidgets)
+ - Made in GNU C++; no interpreted languages or proprietary libs
+   needed
+ - Extensible thru plugins
 
 Compiler-related features:
-
-     - Multiple compiler support:
-       - GCC (MingW / Linux GCC)
-       - MSVC++
-       - Digital Mars
-       - Borland C++ 5.5
-       - Open Watcom
-     - Compiles directly or with makefiles
-     - Predefined project templates
-     - Custom template support
-     - Uses XML format for project files.
-     - Multi-target projects
-     - Workspaces support
-     - Imports MSVC projects and workspaces (NOTE: assembly code and
-       inter-project dependencies not supported yet)
-     - Imports Dev-C++ projects
-     - Integrates with GDB for debugging
+ - Multiple compiler support: GCC (MingW / Linux), MSVC++, Digital
+   Mars, Borland C++ 5.5, Open Watcom
+ - Compiles directly or with makefiles
+ - Predefined project templates
+ - Custom template support
+ - Uses XML format for project files
+ - Multi-target projects
+ - Workspaces support
+ - Imports MSVC projects and workspaces (NOTE: assembly code and
+   inter-project dependencies not supported yet)
+ - Imports Dev-C++ projects
+ - Integrates with GDB for debugging
 
 Interface Features:
+ - Syntax highlighting, customizable and extensible
+ - Code folding for C++ and XML files
+ - Tabbed interface
+ - Code completion plugin
+ - Class Browser
+ - Smart indent
+ - One-key swap between .h and .c/.cpp files
+ - Open files list for quick switching between files (optional)
+ - External customizable "Tools"
+ - To-do list management with different users
 
-     - Syntax highlighting, customizable and extensible
-     - Code folding for C++ and XML files.
-     - Tabbed interface
-     - Code completion plugin
-     - Class Browser
-     - Smart indent
-     - One-key swap between .h and .c/.cpp files
-     - Open files list for quick switching between files (optional)
-     - External customizable "Tools"
-     - To-do list management with different users
+%description -l pl
+Code::Blocks to darmowe IDE dla C++ tworzone specjalnie w celu
+zaspokojenia najwiêkszych potrzeb swoich u¿ytkowników. Zosta³o
+zaprojektowane od pocz±tku aby by³o rozszerzalne i konfigurowalne.
+Code::Blocks, jako zbudowane w oparciu o szkielet wtyczek, mo¿na
+rozszerzaæ. Zawiera czarodzieja dla wtyczek, wiêc mo¿na kompilowaæ
+w³asne.
+
+G³ówne cechy:
+ - otwarte ¼ród³a na licencji GPL 2, bez ukrytych kosztów
+ - wieloplatformowo¶æ - dzia³a na Linuksie i Windows (przy u¿yciu
+   wxWidgets)
+ - stworzone w GNU C++, nie wymaga jêzyków interpretowanych ani
+   w³asno¶ciowych bibliotek
+ - rozszerzalne poprzez wtyczki
+
+Cechy zwi±zane z kompilatorami:
+ - obs³uga wielu kompilatorów: GCC (MingW / Linux), MSVC++, Digital
+   Mars, Borland C++ 5.5, Open Watcom
+ - kompiluje bezpo¶rednio lub z u¿yciem plików Makefile
+ - predefiniowane szablony projektów
+ - obs³uga w³asnych szablonów
+ - u¿ywa formatu XML dla plików projektów
+ - projekty z wieloma celami
+ - obs³uga przestrzeni zadañ (workspace)
+ - import projektów i przestrzeni zadañ MSVC (uwaga: kdo w asemblerze
+   i zale¿no¶ci miêdzy projektami nie s± jeszcze obs³ugiwane)
+ - import projektów Dev-C++
+ - integracja z GDB do odpluskwiania
+
+Cechy interfejsu:
+ - pod¶wietlanie sk³adni - konfigurowalne i rozszerzalne
+ - zwijanie kodu w plikach C++ i XML
+ - interfejs z zak³adkami
+ - wtyczka dope³niania kodu
+ - przegl±darka klas
+ - inteligentne wciêcia
+ - prze³±czanie jednym klawiszem miêdzy plikami .h i .c/.cpp
+ - lista otwartych plików do szybkiego prze³±czania miêdzy nimi
+   (opcja)
+ - zewnêtrzne, konfigurowalne "narzêdzia"
+ - zarz±dzanie list± rzeczy do zrobienia ("To-do") przez ró¿nych
+   u¿ytkowników
 
 %prep
 %setup -q -n %{name}-%{version}%{_rc}
@@ -113,6 +146,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/images
 %{_datadir}/%{name}/lexers
 %{_datadir}/%{name}/templates
-# TODO!
+# TODO: FHS!
 %dir %{_datadir}/%{name}/plugins
 %attr(755,root,root) %{_datadir}/%{name}/plugins/*.so
