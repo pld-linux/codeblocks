@@ -12,6 +12,7 @@ License:	GPL
 Group:		Development/Languages
 Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
 # Source0-md5:	425c700feb77d22b1b85b1061d2504d9
+Patch0:		%{name}-ac.patch
 URL:		http://www.codeblocks.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -107,6 +108,7 @@ Cechy interfejsu:
 
 %prep
 %setup -q -n %{name}-%{version}%{_rc}
+%patch0 -p1
 find . -type f -and -not -name "*.cpp" -and -not -name "*.h" -and -not -name "*.png" -and -not -name "*.bmp" -and -not -name "*.c" -and -not -name "*.cxx" -and -not -name "*.ico" | sed "s/.*/\"\\0\"/" | xargs dos2unix
 chmod a+x acinclude.m4 src/update
 
@@ -134,11 +136,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-#doc README COPYING AUTHORS BUGS COMPILERS TODO NEWS ChangeLog
+%doc AUTHORS BUGS COMPILERS README TODO ChangeLog
 %attr(755,root,root) %{_bindir}/codeblocks
 %attr(755,root,root) %{_bindir}/console_runner
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %{_desktopdir}/*.desktop
+%{_pixmapsdir}/*.png
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*.zip
 %{_datadir}/%{name}/*.txt
