@@ -1,18 +1,19 @@
 #
 # TODO:
-#		- move plugins to libdir/name/...
+#		- set in settings->editor:end-of-line mode to `LF' as default
 #
 Summary:	An open source, cross platform, free C++ IDE
 Summary(pl):	Wieloplatformowe, darmowe IDE do C++ o otwartych ¼ród³ach
 Name:		codeblocks
 Version:	1.0
 %define		_rc	rc2
-Release:	0.%{_rc}.0.2
+Release:	0.%{_rc}.0.3
 License:	GPL
 Group:		Development/Languages
 Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
 # Source0-md5:	425c700feb77d22b1b85b1061d2504d9
 Patch0:		%{name}-ac.patch
+Patch1:		%{name}-fhs.patch
 URL:		http://www.codeblocks.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -21,6 +22,8 @@ BuildRequires:	libtool
 BuildRequires:	wxGTK2-devel >= 2.6.0
 BuildRequires:	zip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define	_pluginsdir %{_libdir}/%{name}/plugins
 
 %description
 Code::Blocks is a free C++ IDE built specifically to meet the most
@@ -109,8 +112,10 @@ Cechy interfejsu:
 %prep
 %setup -q -n %{name}-%{version}%{_rc}
 %patch0 -p1
+%patch1 -p1
 find . -type f -and -not -name "*.cpp" -and -not -name "*.h" -and -not -name "*.png" -and -not -name "*.bmp" -and -not -name "*.c" -and -not -name "*.cxx" -and -not -name "*.ico" | sed "s/.*/\"\\0\"/" | xargs dos2unix
 chmod a+x acinclude.m4 src/update
+find . -name "Makefile.am" -exec %{__sed} -i "s@libdir = \$(pkgdatadir)/plugins@libdir = %{_pluginsdir}@" '{}' ';'
 
 %build
 %{__libtoolize}
@@ -149,6 +154,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/images
 %{_datadir}/%{name}/lexers
 %{_datadir}/%{name}/templates
-# TODO: FHS!
-%dir %{_datadir}/%{name}/plugins
-%attr(755,root,root) %{_datadir}/%{name}/plugins/*.so
+%dir %{_pluginsdir}
+%attr(755,root,root) %{_pluginsdir}/*.so
+%{_pkgconfigdir}/codeblocks.pc
