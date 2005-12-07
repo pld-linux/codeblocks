@@ -1,0 +1,71 @@
+diff -Nur o.codeblocks-1.0rc2/acinclude.m4 n.codeblocks-1.0rc2/acinclude.m4
+--- o.codeblocks-1.0rc2/acinclude.m4	2005-10-25 09:59:00.000000000 +0200
++++ n.codeblocks-1.0rc2/acinclude.m4	2005-12-07 21:28:39.324146448 +0100
+@@ -228,3 +228,19 @@
+ fi
+ 
+ ])
++
++AC_DEFUN([CODEBLOCKS_PLUGINS_DIR],
++	[
++	if test "x$libdir" = "xNONE/lib" ; then
++		plugins_dir="/usr/local/lib/codeblocks/plugins"
++	else
++		plugins_dir="${libdir}/codeblocks/plugins"
++	fi
++	AC_ARG_WITH(plugins-dir,
++				AC_HELP_STRING([--with-plugins-dir=DIR],
++								[Path for the plugins directory (default is $libdir/codeblocks/plugins)]),
++				,
++				with_plugins_dir="$plugins_dir")
++	AC_DEFINE_UNQUOTED(PLUGINDIR, "${with_plugins_dir}", [Code::Blocks plugins' directory])
++	AC_MSG_RESULT(PLUGINDIR: ${with_plugins_dir})
++])
+diff -Nur o.codeblocks-1.0rc2/codeblocks.pc.in n.codeblocks-1.0rc2/codeblocks.pc.in
+--- o.codeblocks-1.0rc2/codeblocks.pc.in	2005-10-25 09:59:00.000000000 +0200
++++ n.codeblocks-1.0rc2/codeblocks.pc.in	2005-12-07 13:50:58.000000000 +0100
+@@ -2,7 +2,7 @@
+ exec_prefix=@exec_prefix@
+ libdir=@libdir@
+ includedir=@includedir@
+-plugindir=@datadir@/@PACKAGE@/plugins
++plugindir=@libdir@/@PACKAGE@/plugins
+ sharedir=@datadir@
+ 
+ Name: codeblocks
+diff -Nur o.codeblocks-1.0rc2/configure.in n.codeblocks-1.0rc2/configure.in
+--- o.codeblocks-1.0rc2/configure.in	2005-10-25 09:59:00.000000000 +0200
++++ n.codeblocks-1.0rc2/configure.in	2005-12-07 21:28:30.369507760 +0100
+@@ -18,6 +18,7 @@
+ AC_PROG_AWK
+ 
+ CODEBLOCKS_SETUP_FOR_TARGET
++CODEBLOCKS_PLUGINS_DIR
+ 
+ AC_DISABLE_STATIC
+ AC_PROG_LIBTOOL
+diff -Nur o.codeblocks-1.0rc2/src/src/main.cpp n.codeblocks-1.0rc2/src/src/main.cpp
+--- o.codeblocks-1.0rc2/src/src/main.cpp	2005-10-25 09:59:02.000000000 +0200
++++ n.codeblocks-1.0rc2/src/src/main.cpp	2005-12-07 20:17:59.000000000 +0100
+@@ -23,6 +23,10 @@
+ * $Date$
+ */
+ 
++#ifdef HAVE_CONFIG_H
++    #include "config.h"
++#endif
++
+ #include <sdk.h>
+ #include "app.h"
+ #include "main.h"
+@@ -660,7 +664,9 @@
+ 
+     PluginManager* m_PluginManager = Manager::Get()->GetPluginManager();
+ 
+-    wxString path = CFG_READ(_T("data_path")) + _T("/plugins");
++    //XXX: FHS changes 
++    wxString path = PLUGINDIR;
++
+     MSGMAN()->Log(_("Scanning for plugins in %s..."), path.c_str());
+     int count = m_PluginManager->ScanForPlugins(path);
+     MSGMAN()->AppendLog(_("Found %d plugins: "), count);
