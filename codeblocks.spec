@@ -7,7 +7,7 @@ Summary(pl):	Wieloplatformowe, darmowe IDE do C++ o otwartych ¼ród³ach
 Name:		codeblocks
 Version:	1.0
 %define		_rc	rc2
-Release:	0.%{_rc}.0.3
+Release:	0.%{_rc}.0.4
 License:	GPL
 Group:		Development/Languages
 Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
@@ -111,11 +111,10 @@ Cechy interfejsu:
 
 %prep
 %setup -q -n %{name}-%{version}%{_rc}
-%patch0 -p1
-%patch1 -p1
 find . -type f -and -not -name "*.cpp" -and -not -name "*.h" -and -not -name "*.png" -and -not -name "*.bmp" -and -not -name "*.c" -and -not -name "*.cxx" -and -not -name "*.ico" | sed "s/.*/\"\\0\"/" | xargs dos2unix
 chmod a+x acinclude.m4 src/update
-find . -name "Makefile.am" -exec %{__sed} -i "s@libdir = \$(pkgdatadir)/plugins@libdir = %{_pluginsdir}@" '{}' ';'
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
