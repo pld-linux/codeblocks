@@ -1,7 +1,3 @@
-#
-# TODO:
-#		- set in settings->editor:end-of-line mode to `LF' as default
-#
 Summary:	An open source, cross platform, free C++ IDE
 Summary(pl):	Wieloplatformowe, darmowe IDE do C++ o otwartych ¼ród³ach
 Name:		codeblocks
@@ -12,6 +8,8 @@ License:	GPL
 Group:		Development/Languages
 Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
 # Source0-md5:	425c700feb77d22b1b85b1061d2504d9
+Source1:	%{name}.conf
+# Source1-md5:	35f36e58f22af41fc746953f15767eea
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-fhs.patch
 URL:		http://www.codeblocks.org/
@@ -129,8 +127,10 @@ chmod a+x acinclude.m4 src/update
 %install
 rm -rf $RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT/%{_sysconfdir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+cp %{SOURCE1} "$RPM_BUILD_ROOT/%{_sysconfdir}/Code::Blocks v1.0"
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -141,6 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS BUGS COMPILERS README TODO ChangeLog
+%config(noreplace) %verify(not md5 mtime size) "%{_sysconfdir}/Code::Blocks v1.0"
 %attr(755,root,root) %{_bindir}/codeblocks
 %attr(755,root,root) %{_bindir}/console_runner
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
