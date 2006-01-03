@@ -9,7 +9,6 @@ Group:		Development/Languages
 Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
 # Source0-md5:	425c700feb77d22b1b85b1061d2504d9
 Source1:	%{name}.conf
-# Source1-md5:	35f36e58f22af41fc746953f15767eea
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-fhs.patch
 URL:		http://www.codeblocks.org/
