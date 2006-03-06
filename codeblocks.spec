@@ -3,7 +3,7 @@ Summary(pl):	Wieloplatformowe, darmowe IDE do C++ o otwartych ¼ród³ach
 Name:		codeblocks
 Version:	1.0
 %define		_rc	rc2
-Release:	0.%{_rc}.0.4
+Release:	0.%{_rc}.0.5
 License:	GPL
 Group:		Development/Languages
 Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
@@ -11,6 +11,7 @@ Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
 Source1:	%{name}.conf
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-fhs.patch
+Patch2:		%{name}-pwd.patch
 URL:		http://www.codeblocks.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -112,6 +113,7 @@ find . -type f -and -not -name "*.cpp" -and -not -name "*.h" -and -not -name "*.
 chmod a+x acinclude.m4 src/update
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__libtoolize}
@@ -130,6 +132,9 @@ install -d $RPM_BUILD_ROOT/%{_sysconfdir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 cp %{SOURCE1} "$RPM_BUILD_ROOT/%{_sysconfdir}/Code::Blocks v1.0"
+
+rm -rf $RPM_BUILD_ROOT%{_pluginsdir}/*.la
+rm -rf $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
