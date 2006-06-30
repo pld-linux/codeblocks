@@ -3,11 +3,14 @@ Summary(pl):	Wieloplatformowe, darmowe IDE do C++ o otwartych ¼ród³ach
 Name:		codeblocks
 Version:	1.0
 %define		_rc	rc2
-Release:	0.%{_rc}.0.5
+%define		_snap	20060630
+#Release:	0.%{_rc}.0.5
+Release:	0.%{_snap}
 License:	GPL
 Group:		Development/Languages
-Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
-# Source0-md5:	425c700feb77d22b1b85b1061d2504d9
+#Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
+Source0:		%{name}-%{_snap}.tar.gz
+# Source0-md5:
 Source1:	%{name}.conf
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-fhs.patch
@@ -108,11 +111,12 @@ Cechy interfejsu:
    u¿ytkowników
 
 %prep
-%setup -q -n %{name}-%{version}%{_rc}
+#%setup -q -n %{name}-%{version}%{_rc}
+%setup -q -n %{name}-%{_snap}
 find . -type f -and -not -name "*.cpp" -and -not -name "*.h" -and -not -name "*.png" -and -not -name "*.bmp" -and -not -name "*.c" -and -not -name "*.cxx" -and -not -name "*.ico" | sed "s/.*/\"\\0\"/" | xargs dos2unix
 chmod a+x acinclude.m4 src/update
-%patch0 -p1
-%patch1 -p1
+#%patch0 -p1
+#%patch1 -p1
 %patch2 -p1
 
 %build
@@ -124,7 +128,6 @@ chmod a+x acinclude.m4 src/update
 %configure \
 	--with-wx-config=wx-gtk2-ansi-config
 %{__make}
-
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -147,17 +150,24 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS BUGS COMPILERS README TODO ChangeLog
 %config(noreplace) %verify(not md5 mtime size) "%{_sysconfdir}/Code::Blocks v1.0"
 %attr(755,root,root) %{_bindir}/codeblocks
-%attr(755,root,root) %{_bindir}/console_runner
+%attr(755,root,root) %{_bindir}/cb_console_runner
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
+%{_datadir}/icons/gnome/48x48/mimetypes/*.png
+%{_datadir}/application-registry/codeblocks.applications
+%{_datadir}/mime/packages/codeblocks.xml
+%{_datadir}/mime-info/codeblocks*
 %dir %{_datadir}/%{name}
+%dir %{_datadir}/%{name}/scripts
+%{_datadir}/%{name}/scripts
 %{_datadir}/%{name}/*.zip
 %{_datadir}/%{name}/*.txt
 %{_datadir}/%{name}/icons
 %{_datadir}/%{name}/images
 %{_datadir}/%{name}/lexers
 %{_datadir}/%{name}/templates
-%dir %{_pluginsdir}
-%attr(755,root,root) %{_pluginsdir}/*.so
+%{_datadir}/%{name}/plugins/*
+#%dir %{_pluginsdir}
+#%attr(755,root,root) %{_pluginsdir}/*.so
 %{_pkgconfigdir}/codeblocks.pc
