@@ -8,9 +8,8 @@ Version:	1.0
 Release:	0.%{_snap}
 License:	GPL
 Group:		Development/Languages
-#Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
-Source0:		%{name}-%{_snap}.tar.gz
-# Source0-md5:
+## Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
+Source0:	%{name}-%{_snap}.tar.gz
 Source1:	%{name}.conf
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-fhs.patch
@@ -160,7 +159,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime-info/codeblocks*
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/scripts
-%dir %{_datadir}/plugins
+%dir %{_datadir}/%{name}/plugins
 %{_datadir}/%{name}/scripts
 %{_datadir}/%{name}/*.zip
 %{_datadir}/%{name}/*.txt
