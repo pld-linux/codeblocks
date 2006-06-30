@@ -160,6 +160,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime-info/codeblocks*
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/scripts
+%dir %{_datadir}/plugins
 %{_datadir}/%{name}/scripts
 %{_datadir}/%{name}/*.zip
 %{_datadir}/%{name}/*.txt
