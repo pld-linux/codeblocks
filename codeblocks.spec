@@ -153,7 +153,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
-%{_datadir}/icons/gnome/48x48/mimetypes/*.png
+%{_iconsdir}/gnome/48x48/mimetypes/*.png
 %{_datadir}/application-registry/codeblocks.applications
 %{_datadir}/mime/packages/codeblocks.xml
 %{_datadir}/mime-info/codeblocks*
