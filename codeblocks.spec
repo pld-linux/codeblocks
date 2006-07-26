@@ -1,9 +1,9 @@
+%define		_rc	rc2
+%define		_snap	20060630
 Summary:	An open source, cross platform, free C++ IDE
 Summary(pl):	Wieloplatformowe, darmowe IDE do C++ o otwartych ¼ród³ach
 Name:		codeblocks
 Version:	1.0
-%define		_rc	rc2
-%define		_snap	20060630
 #Release:	0.%{_rc}.0.5
 Release:	0.%{_snap}
 License:	GPL
@@ -35,8 +35,7 @@ wizard so you can compile your own plugins!
 Highlights:
  - Open Source! GPL 2, no hidden costs
  - Cross-platform; runs on Linux or Windows (uses wxWidgets)
- - Made in GNU C++; no interpreted languages or proprietary libs
-   needed
+ - Made in GNU C++; no interpreted languages or proprietary libs needed
  - Extensible thru plugins
 
 Compiler-related features:
@@ -90,8 +89,8 @@ Cechy zwi±zane z kompilatorami:
  - u¿ywa formatu XML dla plików projektów
  - projekty z wieloma celami
  - obs³uga przestrzeni zadañ (workspace)
- - import projektów i przestrzeni zadañ MSVC (uwaga: kdo w asemblerze
-   i zale¿no¶ci miêdzy projektami nie s± jeszcze obs³ugiwane)
+ - import projektów i przestrzeni zadañ MSVC (uwaga: kdo w asemblerze i
+   zale¿no¶ci miêdzy projektami nie s± jeszcze obs³ugiwane)
  - import projektów Dev-C++
  - integracja z GDB do odpluskwiania
 
@@ -103,8 +102,7 @@ Cechy interfejsu:
  - przegl±darka klas
  - inteligentne wciêcia
  - prze³±czanie jednym klawiszem miêdzy plikami .h i .c/.cpp
- - lista otwartych plików do szybkiego prze³±czania miêdzy nimi
-   (opcja)
+ - lista otwartych plików do szybkiego prze³±czania miêdzy nimi (opcja)
  - zewnêtrzne, konfigurowalne "narzêdzia"
  - zarz±dzanie list± rzeczy do zrobienia ("To-do") przez ró¿nych
    u¿ytkowników
@@ -130,10 +128,10 @@ chmod a+x acinclude.m4 src/update
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/%{_sysconfdir}
+install -d $RPM_BUILD_ROOT%{_sysconfdir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-cp %{SOURCE1} "$RPM_BUILD_ROOT/%{_sysconfdir}/Code::Blocks v1.0"
+cp %{SOURCE1} "$RPM_BUILD_ROOT%{_sysconfdir}/Code::Blocks v1.0"
 
 rm -rf $RPM_BUILD_ROOT%{_pluginsdir}/*.la
 rm -rf $RPM_BUILD_ROOT%{_libdir}/*.la
