@@ -1,5 +1,5 @@
 %define		_rc	rc2
-%define		_snap	20060630
+%define		_snap	20060721
 Summary:	An open source, cross platform, free C++ IDE
 Summary(pl):	Wieloplatformowe, darmowe IDE do C++ o otwartych ¼ród³ach
 Name:		codeblocks
@@ -8,17 +8,20 @@ Version:	1.0
 Release:	0.%{_snap}
 License:	GPL
 Group:		Development/Languages
-## Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
+# Source0:    http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
 Source0:	%{name}-%{_snap}.tar.gz
+# Source0-md5:	1ec8c03eff46629cdb1cbc1516ffa78e 
 Source1:	%{name}.conf
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-fhs.patch
 Patch2:		%{name}-pwd.patch
+Patch3:		%{name}-gcc-4.1.patch
 URL:		http://www.codeblocks.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dos2unix
 BuildRequires:	libtool
+BuildRequires:	unixODBC-devel
 BuildRequires:	wxGTK2-devel >= 2.6.0
 BuildRequires:	zip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -114,9 +117,13 @@ find . -type f -and -not -name "*.cpp" -and -not -name "*.h" -and -not -name "*.
 chmod a+x acinclude.m4 src/update
 #%patch0 -p1
 #%patch1 -p1
-%patch2 -p1
+#%patch2 -p1
+%patch3 -p0
 
 %build
+# Because of new bootstrap script, crating revision.m4
+echo "m4_define([SVN_REVISION], trunk-r0)" > ./revision.m4
+
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
