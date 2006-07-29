@@ -1,0 +1,12 @@
+--- src/sdk/scripting/bindings/scriptbindings.cpp.orig 2006-07-09 13:54:49.000000000 +0200
++++ src/sdk/scripting/bindings/scriptbindings.cpp 2006-07-09 13:55:13.000000000 +0200
+@@ -13,6 +13,9 @@
+ #include <globals.h>
+ #endif
+ 
++class SQVM;
++namespace SqPlus { void Push(SQVM*, const wxArrayString&); }
++
+ #include "scriptbindings.h"
+ #include <cbexception.h>
+ #include "sc_base_types.h" 
