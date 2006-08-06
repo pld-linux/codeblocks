@@ -1,0 +1,3 @@
+- up to 20060721
+- patch to make it build with gcc >= 4.1 (from codeblocks bugtrack)
+- actually builds on th
