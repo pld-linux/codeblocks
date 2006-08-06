@@ -10,7 +10,7 @@ License:	GPL
 Group:		Development/Languages
 # Source0:    http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
 Source0:	%{name}-%{_snap}.tar.gz
-# Source0-md5:	1ec8c03eff46629cdb1cbc1516ffa78e 
+# Source0-md5:	1ec8c03eff46629cdb1cbc1516ffa78e
 Source1:	%{name}.conf
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-fhs.patch
@@ -110,6 +110,19 @@ Cechy interfejsu:
  - zarz±dzanie list± rzeczy do zrobienia ("To-do") przez ró¿nych
    u¿ytkowników
 
+%package devel
+Summary:	Development files for Code::Blocks
+Summary(pl):	Pliki nag³ówkowe Code::Blocks
+Group:		Development/Libraries
+
+%description devel
+This package provides development files for Code::Blocks. Install this
+package only if you plan to write plugins for Code::Blocks.
+
+%description devel -l pl
+Ten pakiet dostarcza plików nag³ówkowych Code::Blocks. Instaluj ten
+pakiet tylko je¶li planujesz pisanie wtyczek do Code::Blocks.
+
 %prep
 #%setup -q -n %{name}-%{version}%{_rc}
 %setup -q -n %{name}-%{_snap}
@@ -139,9 +152,6 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 cp %{SOURCE1} "$RPM_BUILD_ROOT%{_sysconfdir}/Code::Blocks v1.0"
-
-rm -rf $RPM_BUILD_ROOT%{_pluginsdir}/*.la
-rm -rf $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -176,3 +186,9 @@ rm -rf $RPM_BUILD_ROOT
 #%dir %{_pluginsdir}
 #%attr(755,root,root) %{_pluginsdir}/*.so
 %{_pkgconfigdir}/codeblocks.pc
+%{_mandir}/man1/*
+
+%files devel
+%defattr(644,root,root,755)
+%{_libdir}/*.la
+%{_includedir}/codeblocks
