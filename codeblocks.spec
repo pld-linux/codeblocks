@@ -26,7 +26,7 @@ BuildRequires:	wxGTK2-devel >= 2.6.0
 BuildRequires:	zip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	_pluginsdir %{_libdir}/%{name}/plugins
+%define		_pluginsdir %{_libdir}/%{name}/plugins
 
 %description
 Code::Blocks is a free C++ IDE built specifically to meet the most
@@ -114,14 +114,15 @@ Cechy interfejsu:
 Summary:	Development files for Code::Blocks
 Summary(pl):	Pliki nag³ówkowe Code::Blocks
 Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 This package provides development files for Code::Blocks. Install this
 package only if you plan to write plugins for Code::Blocks.
 
 %description devel -l pl
-Ten pakiet dostarcza plików nag³ówkowych Code::Blocks. Instaluj ten
-pakiet tylko je¶li planujesz pisanie wtyczek do Code::Blocks.
+Ten pakiet dostarcza plików nag³ówkowych Code::Blocks. Nale¿y
+instalowaæ ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
 
 %prep
 #%setup -q -n %{name}-%{version}%{_rc}
@@ -190,5 +191,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/*.la
 %{_includedir}/codeblocks
