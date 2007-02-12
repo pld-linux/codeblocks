@@ -1,7 +1,7 @@
 %define		_rc	rc2
 %define		_snap	20060721
 Summary:	An open source, cross platform, free C++ IDE
-Summary(pl.UTF-8):   Wieloplatformowe, darmowe IDE do C++ o otwartych źródłach
+Summary(pl.UTF-8):	Wieloplatformowe, darmowe IDE do C++ o otwartych źródłach
 Name:		codeblocks
 Version:	1.0
 #Release:	0.%{_rc}.0.5
@@ -112,7 +112,7 @@ Cechy interfejsu:
 
 %package devel
 Summary:	Development files for Code::Blocks
-Summary(pl.UTF-8):   Pliki nagłówkowe Code::Blocks
+Summary(pl.UTF-8):	Pliki nagłówkowe Code::Blocks
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
