@@ -1,7 +1,7 @@
 %define		_rc	rc2
 %define		_snap	20060721
 Summary:	An open source, cross platform, free C++ IDE
-Summary(pl):	Wieloplatformowe, darmowe IDE do C++ o otwartych ¼ród³ach
+Summary(pl.UTF-8):   Wieloplatformowe, darmowe IDE do C++ o otwartych ÅºrÃ³dÅ‚ach
 Name:		codeblocks
 Version:	1.0
 #Release:	0.%{_rc}.0.5
@@ -67,52 +67,52 @@ Interface Features:
  - External customizable "Tools"
  - To-do list management with different users
 
-%description -l pl
+%description -l pl.UTF-8
 Code::Blocks to darmowe IDE dla C++ tworzone specjalnie w celu
-zaspokojenia najwiêkszych potrzeb swoich u¿ytkowników. Zosta³o
-zaprojektowane od pocz±tku aby by³o rozszerzalne i konfigurowalne.
-Code::Blocks, jako zbudowane w oparciu o szkielet wtyczek, mo¿na
-rozszerzaæ. Zawiera czarodzieja dla wtyczek, wiêc mo¿na kompilowaæ
-w³asne.
+zaspokojenia najwiÄ™kszych potrzeb swoich uÅ¼ytkownikÃ³w. ZostaÅ‚o
+zaprojektowane od poczÄ…tku aby byÅ‚o rozszerzalne i konfigurowalne.
+Code::Blocks, jako zbudowane w oparciu o szkielet wtyczek, moÅ¼na
+rozszerzaÄ‡. Zawiera czarodzieja dla wtyczek, wiÄ™c moÅ¼na kompilowaÄ‡
+wÅ‚asne.
 
-G³ówne cechy:
- - otwarte ¼ród³a na licencji GPL 2, bez ukrytych kosztów
- - wieloplatformowo¶æ - dzia³a na Linuksie i Windows (przy u¿yciu
+GÅ‚Ã³wne cechy:
+ - otwarte ÅºrÃ³dÅ‚a na licencji GPL 2, bez ukrytych kosztÃ³w
+ - wieloplatformowoÅ›Ä‡ - dziaÅ‚a na Linuksie i Windows (przy uÅ¼yciu
    wxWidgets)
- - stworzone w GNU C++, nie wymaga jêzyków interpretowanych ani
-   w³asno¶ciowych bibliotek
+ - stworzone w GNU C++, nie wymaga jÄ™zykÃ³w interpretowanych ani
+   wÅ‚asnoÅ›ciowych bibliotek
  - rozszerzalne poprzez wtyczki
 
-Cechy zwi±zane z kompilatorami:
- - obs³uga wielu kompilatorów: GCC (MingW / Linux), MSVC++, Digital
+Cechy zwiÄ…zane z kompilatorami:
+ - obsÅ‚uga wielu kompilatorÃ³w: GCC (MingW / Linux), MSVC++, Digital
    Mars, Borland C++ 5.5, Open Watcom
- - kompiluje bezpo¶rednio lub z u¿yciem plików Makefile
- - predefiniowane szablony projektów
- - obs³uga w³asnych szablonów
- - u¿ywa formatu XML dla plików projektów
+ - kompiluje bezpoÅ›rednio lub z uÅ¼yciem plikÃ³w Makefile
+ - predefiniowane szablony projektÃ³w
+ - obsÅ‚uga wÅ‚asnych szablonÃ³w
+ - uÅ¼ywa formatu XML dla plikÃ³w projektÃ³w
  - projekty z wieloma celami
- - obs³uga przestrzeni zadañ (workspace)
- - import projektów i przestrzeni zadañ MSVC (uwaga: kdo w asemblerze i
-   zale¿no¶ci miêdzy projektami nie s± jeszcze obs³ugiwane)
- - import projektów Dev-C++
+ - obsÅ‚uga przestrzeni zadaÅ„ (workspace)
+ - import projektÃ³w i przestrzeni zadaÅ„ MSVC (uwaga: kdo w asemblerze i
+   zaleÅ¼noÅ›ci miÄ™dzy projektami nie sÄ… jeszcze obsÅ‚ugiwane)
+ - import projektÃ³w Dev-C++
  - integracja z GDB do odpluskwiania
 
 Cechy interfejsu:
- - pod¶wietlanie sk³adni - konfigurowalne i rozszerzalne
+ - podÅ›wietlanie skÅ‚adni - konfigurowalne i rozszerzalne
  - zwijanie kodu w plikach C++ i XML
- - interfejs z zak³adkami
- - wtyczka dope³niania kodu
- - przegl±darka klas
- - inteligentne wciêcia
- - prze³±czanie jednym klawiszem miêdzy plikami .h i .c/.cpp
- - lista otwartych plików do szybkiego prze³±czania miêdzy nimi (opcja)
- - zewnêtrzne, konfigurowalne "narzêdzia"
- - zarz±dzanie list± rzeczy do zrobienia ("To-do") przez ró¿nych
-   u¿ytkowników
+ - interfejs z zakÅ‚adkami
+ - wtyczka dopeÅ‚niania kodu
+ - przeglÄ…darka klas
+ - inteligentne wciÄ™cia
+ - przeÅ‚Ä…czanie jednym klawiszem miÄ™dzy plikami .h i .c/.cpp
+ - lista otwartych plikÃ³w do szybkiego przeÅ‚Ä…czania miÄ™dzy nimi (opcja)
+ - zewnÄ™trzne, konfigurowalne "narzÄ™dzia"
+ - zarzÄ…dzanie listÄ… rzeczy do zrobienia ("To-do") przez rÃ³Å¼nych
+   uÅ¼ytkownikÃ³w
 
 %package devel
 Summary:	Development files for Code::Blocks
-Summary(pl):	Pliki nag³ówkowe Code::Blocks
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe Code::Blocks
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -120,9 +120,9 @@ Requires:	%{name} = %{version}-%{release}
 This package provides development files for Code::Blocks. Install this
 package only if you plan to write plugins for Code::Blocks.
 
-%description devel -l pl
-Ten pakiet dostarcza plików nag³ówkowych Code::Blocks. Nale¿y
-instalowaæ ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
+%description devel -l pl.UTF-8
+Ten pakiet dostarcza plikÃ³w nagÅ‚Ã³wkowych Code::Blocks. NaleÅ¼y
+instalowaÄ‡ ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
 
 %prep
 #%setup -q -n %{name}-%{version}%{_rc}
