@@ -1,28 +1,31 @@
-%define		_rc	rc2
-%define		_snap	20060721
+#TODO
+#	- snap build from svn
+#	- review remains patches and Source1
+
+##%define		_rc	rc2
+##%define		_snap	20060721
 Summary:	An open source, cross platform, free C++ IDE
 Summary(pl.UTF-8):	Wieloplatformowe, darmowe IDE do C++ o otwartych źródłach
 Name:		codeblocks
-Version:	1.0
-#Release:	0.%{_rc}.0.5
-Release:	0.%{_snap}
+Version:	8.02
+Release:	0.1
+#Release:	0.%{_snap}
 License:	GPL
 Group:		Development/Languages
-# Source0:    http://dl.sourceforge.net/codeblocks/%{name}-%{version}%{_rc}.tgz
-Source0:	%{name}-%{_snap}.tar.gz
-# Source0-md5:	1ec8c03eff46629cdb1cbc1516ffa78e
-Source1:	%{name}.conf
-Patch0:		%{name}-ac.patch
-Patch1:		%{name}-fhs.patch
-Patch2:		%{name}-pwd.patch
-Patch3:		%{name}-gcc-4.1.patch
+#Source0:	%{name}-%{_snap}.tar.gz
+Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}-src.tar.bz2
+# Source0-md5:	ac15b4b3de50d7650c2f7a8dbcb30f88
+Patch0:		%{name}-FHS-plugins.patch
+#Source1:	%{name}.conf
+#Patch0:		%{name}-ac.patch
+#Patch3:		%{name}-gcc-4.1.patch
 URL:		http://www.codeblocks.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dos2unix
 BuildRequires:	libtool
 BuildRequires:	unixODBC-devel
-BuildRequires:	wxGTK2-devel >= 2.6.0
+BuildRequires:	wxGTK2-unicode-devel >= 2.8.0
 BuildRequires:	zip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -125,16 +128,42 @@ Ten pakiet dostarcza plików nagłówkowych Code::Blocks. Należy
 instalować ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
 
 %prep
-#%setup -q -n %{name}-%{version}%{_rc}
-%setup -q -n %{name}-%{_snap}
+%setup -q -n %{name}-%{version}
+#%setup -q -n %{name}-%{_snap}
 find . -type f -and -not -name "*.cpp" -and -not -name "*.h" -and -not -name "*.png" -and -not -name "*.bmp" -and -not -name "*.c" -and -not -name "*.cxx" -and -not -name "*.ico" | sed "s/.*/\"\\0\"/" | xargs dos2unix
-chmod a+x acinclude.m4 src/update
-#%patch0 -p1
+chmod a+x acinclude.m4 src/update configure
+
+%patch0 -p1
 #%patch1 -p1
 #%patch2 -p1
-%patch3 -p0
+#%patch3 -p0
 
-%build
+# fix the dir, where plugins are installed
+for p in astyle autosave classwizard codecompletion compilergcc debuggergdb \
+defaultmimehandler openfileslist projectsimporter scriptedwizard todo xpmanifest
+do
+	sed -i 's|$(pkgdatadir)/plugins|@libdir@/@PACKAGE@/plugins|' src/plugins/$p/Makefile.*
+done
+
+for p in AutoVersioning BrowseTracker ThreadSearch byogames cb_koders \
+codesnippets codestat dragscroll envvars help_plugin keybinder lib_finder \
+profiler regex_testbed source_exporter symtab wxSmith wxSmithContribItems
+do
+	sed -i 's|$(pkgdatadir)/plugins|@libdir@/@PACKAGE@/plugins|' src/plugins/contrib/$p/Makefile.*
+done
+
+sed -i 's|$(pkgdatadir)/plugins|@libdir@/@PACKAGE@/plugins|' src/plugins/contrib/wxSmith/plugin/Makefile.*
+
+#hardcode libdir, continue of patch0 
+sed -i 's|@libdir@|%{_libdir}|' src/sdk/configmanager.cpp
+
+# remove execute bits from source files
+find src/plugins/contrib/regex_testbed -type f -exec chmod a-x {} ';'
+find src/plugins/compilergcc -type f -exec chmod a-x {} ';'
+
+# fix version inside the configure script
+sed -i 's/1\.0svn/%{version}/g' configure
+
 # Because of new bootstrap script, crating revision.m4
 echo "m4_define([SVN_REVISION], trunk-r0)" > ./revision.m4
 
@@ -144,7 +173,9 @@ echo "m4_define([SVN_REVISION], trunk-r0)" > ./revision.m4
 %{__autoheader}
 %{__automake}
 %configure \
-	--with-wx-config=wx-gtk2-ansi-config
+	--with-wx-config=wx-gtk2-unicode-config \
+	--with-contrib-plugins=all
+
 %{__make}
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -152,7 +183,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-cp %{SOURCE1} "$RPM_BUILD_ROOT%{_sysconfdir}/Code::Blocks v1.0"
+
+rm -f $RPM_BUILD_ROOT%{_pluginsdir}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -163,34 +195,34 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS BUGS COMPILERS README TODO ChangeLog
-%config(noreplace) %verify(not md5 mtime size) "%{_sysconfdir}/Code::Blocks v1.0"
+%attr(755,root,root) %{_bindir}/cb_share_config
 %attr(755,root,root) %{_bindir}/codeblocks
+%attr(755,root,root) %{_bindir}/codesnippets
 %attr(755,root,root) %{_bindir}/cb_console_runner
+%attr(755,root,root) %{_libdir}/libwxsmithlib.so*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
 %{_iconsdir}/gnome/48x48/mimetypes/*.png
-%{_datadir}/application-registry/codeblocks.applications
+#%{_datadir}/application-registry/codeblocks.applications
 %{_datadir}/mime/packages/codeblocks.xml
-%{_datadir}/mime-info/codeblocks*
+#%{_datadir}/mime-info/codeblocks*
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/scripts
-%dir %{_datadir}/%{name}/plugins
-%{_datadir}/%{name}/scripts
+%{_datadir}/%{name}/scripts/*
 %{_datadir}/%{name}/*.zip
 %{_datadir}/%{name}/*.txt
 %{_datadir}/%{name}/icons
 %{_datadir}/%{name}/images
 %{_datadir}/%{name}/lexers
 %{_datadir}/%{name}/templates
-%{_datadir}/%{name}/plugins/*
-#%dir %{_pluginsdir}
-#%attr(755,root,root) %{_pluginsdir}/*.so
-%{_pkgconfigdir}/codeblocks.pc
+%dir %{_pluginsdir}
+%attr(755,root,root) %{_pluginsdir}/*.so
 %{_mandir}/man1/*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib%{name}.so*
+%{_pkgconfigdir}/codeblocks.pc
 %{_libdir}/*.la
 %{_includedir}/codeblocks
