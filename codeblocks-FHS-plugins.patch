@@ -1,0 +1,13 @@
+diff -urN codeblocks-8.02_orig/src/sdk/configmanager.cpp codeblocks-8.02/src/sdk/configmanager.cpp
+--- codeblocks-8.02_orig/src/sdk/configmanager.cpp	2008-02-27 13:15:26.000000000 +0000
++++ codeblocks-8.02/src/sdk/configmanager.cpp	2008-05-22 09:20:22.000000000 +0000
+@@ -467,7 +467,8 @@
+             return ::wxGetCwd();
+ 
+         case sdPluginsGlobal:
+-            return ConfigManager::data_path_global + _T("/plugins");
++           // return ConfigManager::data_path_global + _T("/plugins");
++	          return _T("@libdir@/codeblocks/plugins");
+ 
+         case sdPluginsUser:
+             return ConfigManager::data_path_user   + _T("/plugins");
