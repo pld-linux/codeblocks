@@ -2,19 +2,31 @@
 #	- snap build from svn
 #	- review remains patches and Source1
 
-##%define		_rc	rc2
-##%define		_snap	20060721
+%bcond_with snap     # build snap instead of release
+
+%if %{with snap}
+%define		_svn	svn5082
+%define		_snap	20080531
+%endif
+
 Summary:	An open source, cross platform, free C++ IDE
 Summary(pl.UTF-8):	Wieloplatformowe, darmowe IDE do C++ o otwartych źródłach
 Name:		codeblocks
+%if %{with snap}
+Version:	1.0
+Release:	%{_snap}%{_svn}
+%else
 Version:	8.02
 Release:	0.1
-#Release:	0.%{_snap}
+%endif
 License:	GPL
 Group:		Development/Languages
-#Source0:	%{name}-%{_snap}.tar.gz
+%if %{with snap}
+Source0:	%{name}-%{_snap}.tar.gz
+%else
 Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}-src.tar.bz2
 # Source0-md5:	ac15b4b3de50d7650c2f7a8dbcb30f88
+%endif
 Patch0:		%{name}-FHS-plugins.patch
 #Source1:	%{name}.conf
 #Patch0:		%{name}-ac.patch
@@ -128,10 +140,16 @@ Ten pakiet dostarcza plików nagłówkowych Code::Blocks. Należy
 instalować ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
 
 %prep
+%if %{with snap}
+%setup -q -n %{name}-%{_snap}
+%else
 %setup -q -n %{name}-%{version}
-#%setup -q -n %{name}-%{_snap}
+%endif
 find . -type f -and -not -name "*.cpp" -and -not -name "*.h" -and -not -name "*.png" -and -not -name "*.bmp" -and -not -name "*.c" -and -not -name "*.cxx" -and -not -name "*.ico" | sed "s/.*/\"\\0\"/" | xargs dos2unix
-chmod a+x acinclude.m4 src/update configure
+
+%if %{without snap}
+chmod -f a+x acinclude.m4 src/update configure
+%endif
 
 %patch0 -p1
 #%patch1 -p1
@@ -162,16 +180,20 @@ find src/plugins/contrib/regex_testbed -type f -exec chmod a-x {} ';'
 find src/plugins/compilergcc -type f -exec chmod a-x {} ';'
 
 # fix version inside the configure script
-sed -i 's/1\.0svn/%{version}/g' configure
+#sed -i 's/1\.0svn/%{version}/g' configure
 
-# Because of new bootstrap script, crating revision.m4
-echo "m4_define([SVN_REVISION], trunk-r0)" > ./revision.m4
-
+%if %{with snap}
+chmod a+x update_revision.sh
+./update_revision.sh
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
 %{__automake}
+%else
+# fix version inside the configure script
+sed -i 's/1\.0svn/%{version}/g' configure
+%endif
 %configure \
 	--with-wx-config=wx-gtk2-unicode-config \
 	--with-contrib-plugins=all
