@@ -1,6 +1,6 @@
 #TODO
 #	- snap build from svn
-#	- review remains patches and Source1
+#
 
 %bcond_with snap     # build snap instead of release
 
@@ -17,10 +17,10 @@ Version:	1.0
 Release:	%{_snap}%{_svn}
 %else
 Version:	8.02
-Release:	0.1
+Release:	1
 %endif
-License:	GPL
-Group:		Development/Languages
+License:	GPL v3
+Group:		X11/Development/Tools
 %if %{with snap}
 Source0:	%{name}-%{_snap}.tar.gz
 %else
@@ -28,17 +28,23 @@ Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}-src.tar.bz2
 # Source0-md5:	ac15b4b3de50d7650c2f7a8dbcb30f88
 %endif
 Patch0:		%{name}-FHS-plugins.patch
-#Source1:	%{name}.conf
-#Patch0:		%{name}-ac.patch
-#Patch3:		%{name}-gcc-4.1.patch
+Patch1:		%{name}-desktop.patch
+Patch2:		%{name}-ac.patch
 URL:		http://www.codeblocks.org/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
+BuildRequires:	bzip2-devel
 BuildRequires:	dos2unix
 BuildRequires:	libtool
+BuildRequires:	pkgconfig
+BuildRequires:	sed >= 4.0
 BuildRequires:	unixODBC-devel
 BuildRequires:	wxGTK2-unicode-devel >= 2.8.0
 BuildRequires:	zip
+BuildRequires:	zlib-devel
+Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk+2
+Requires(post,postun):	shared-mime-info
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pluginsdir %{_libdir}/%{name}/plugins
@@ -51,7 +57,7 @@ Code::Blocks can be extended with plugin DLLs. It includes a plugin
 wizard so you can compile your own plugins!
 
 Highlights:
- - Open Source! GPL 2, no hidden costs
+ - Open Source! GPL 3, no hidden costs
  - Cross-platform; runs on Linux or Windows (uses wxWidgets)
  - Made in GNU C++; no interpreted languages or proprietary libs needed
  - Extensible thru plugins
@@ -91,7 +97,7 @@ rozszerzać. Zawiera czarodzieja dla wtyczek, więc można kompilować
 własne.
 
 Główne cechy:
- - otwarte źródła na licencji GPL 2, bez ukrytych kosztów
+ - otwarte źródła na licencji GPL 3, bez ukrytych kosztów
  - wieloplatformowość - działa na Linuksie i Windows (przy użyciu
    wxWidgets)
  - stworzone w GNU C++, nie wymaga języków interpretowanych ani
@@ -128,7 +134,7 @@ Cechy interfejsu:
 %package devel
 Summary:	Development files for Code::Blocks
 Summary(pl.UTF-8):	Pliki nagłówkowe Code::Blocks
-Group:		Development/Libraries
+Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
@@ -143,18 +149,13 @@ instalować ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
 %if %{with snap}
 %setup -q -n %{name}-%{_snap}
 %else
-%setup -q -n %{name}-%{version}
+%setup -q
 %endif
 find . -type f -and -not -name "*.cpp" -and -not -name "*.h" -and -not -name "*.png" -and -not -name "*.bmp" -and -not -name "*.c" -and -not -name "*.cxx" -and -not -name "*.ico" | sed "s/.*/\"\\0\"/" | xargs dos2unix
 
-%if %{without snap}
-chmod -f a+x acinclude.m4 src/update configure
-%endif
-
 %patch0 -p1
-#%patch1 -p1
-#%patch2 -p1
-#%patch3 -p0
+%patch1 -p1
+%patch2 -p1
 
 # fix the dir, where plugins are installed
 for p in astyle autosave classwizard codecompletion compilergcc debuggergdb \
@@ -172,7 +173,7 @@ done
 
 sed -i 's|$(pkgdatadir)/plugins|@libdir@/@PACKAGE@/plugins|' src/plugins/contrib/wxSmith/plugin/Makefile.*
 
-#hardcode libdir, continue of patch0 
+#hardcode libdir, continue of patch0
 sed -i 's|@libdir@|%{_libdir}|' src/sdk/configmanager.cpp
 
 # remove execute bits from source files
@@ -180,39 +181,47 @@ find src/plugins/contrib/regex_testbed -type f -exec chmod a-x {} ';'
 find src/plugins/compilergcc -type f -exec chmod a-x {} ';'
 
 # fix version inside the configure script
-#sed -i 's/1\.0svn/%{version}/g' configure
+sed -i 's/1\.0svn/%{version}/g' revision.m4
 
+%build
 %if %{with snap}
 chmod a+x update_revision.sh
 ./update_revision.sh
+%endif
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%else
-# fix version inside the configure script
-sed -i 's/1\.0svn/%{version}/g' configure
-%endif
 %configure \
 	--with-wx-config=wx-gtk2-unicode-config \
 	--with-contrib-plugins=all
 
 %{__make}
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_sysconfdir}
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	mimeicondir=%{_iconsdir}/hicolor/48x48/mimetypes
 
 rm -f $RPM_BUILD_ROOT%{_pluginsdir}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post
+/sbin/ldconfig
+%update_icon_cache hicolor
+%update_desktop_database_post
+%update_mime_database
+
+%postun
+/sbin/ldconfig
+%update_icon_cache hicolor
+%update_desktop_database_postun
+%update_mime_database
 
 %files
 %defattr(644,root,root,755)
@@ -221,14 +230,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/codeblocks
 %attr(755,root,root) %{_bindir}/codesnippets
 %attr(755,root,root) %{_bindir}/cb_console_runner
-%attr(755,root,root) %{_libdir}/libwxsmithlib.so*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%{_desktopdir}/*.desktop
+%attr(755,root,root) %{_libdir}/libwxsmithlib.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libwxsmithlib.so.0
+%attr(755,root,root) %{_libdir}/libcodeblocks.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libcodeblocks.so.0
+%{_desktopdir}/codeblocks.desktop
 %{_pixmapsdir}/*.png
-%{_iconsdir}/gnome/48x48/mimetypes/*.png
-#%{_datadir}/application-registry/codeblocks.applications
+%{_iconsdir}/hicolor/48x48/mimetypes/*.png
 %{_datadir}/mime/packages/codeblocks.xml
-#%{_datadir}/mime-info/codeblocks*
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/scripts
 %{_datadir}/%{name}/scripts/*
@@ -237,14 +246,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/icons
 %{_datadir}/%{name}/images
 %{_datadir}/%{name}/lexers
+%{_datadir}/%{name}/lib_finder
 %{_datadir}/%{name}/templates
+%dir %{_libdir}/%{name}
 %dir %{_pluginsdir}
 %attr(755,root,root) %{_pluginsdir}/*.so
-%{_mandir}/man1/*
+%{_mandir}/man1/*.1*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib%{name}.so*
+%attr(755,root,root) %{_libdir}/libcodeblocks.so
+%attr(755,root,root) %{_libdir}/libwxsmithlib.so
+%{_libdir}/libcodeblocks.la
+%{_libdir}/libwxsmithlib.la
 %{_pkgconfigdir}/codeblocks.pc
-%{_libdir}/*.la
 %{_includedir}/codeblocks
