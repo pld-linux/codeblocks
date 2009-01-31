@@ -1,0 +1,20 @@
+diff -urN codeblocks-8.02/src/setup/mime/codeblocks.desktop codeblocks-8.02.new/src/setup/mime/codeblocks.desktop
+--- codeblocks-8.02/src/setup/mime/codeblocks.desktop	2009-01-30 20:16:37.000000000 +0100
++++ codeblocks-8.02.new/src/setup/mime/codeblocks.desktop	2009-01-30 20:42:31.000000000 +0100
+@@ -1,14 +1,12 @@
+ [Desktop Entry]
+ Version=1.0
+-Encoding=UTF-8
+ Name=Code::Blocks IDE
+ Comment=Configurable and extensible IDE
+ Exec=codeblocks %F
+-Icon=codeblocks.png
++Icon=codeblocks
+ Terminal=false
+ X-MultipleArgs=false
+ Type=Application
+-Categories=Application;Development;
++Categories=GTK;Development;IDE;
+ StartupNotify=true
+ MimeType=application/x-codeblocks;application/x-codeblocks-workspace;
+-GenericName[en_GR]=
