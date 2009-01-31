@@ -1,0 +1,320 @@
+diff -urN codeblocks-8.02/src/plugins/astyle/resources/Makefile.am codeblocks-8.02.new/src/plugins/astyle/resources/Makefile.am
+--- codeblocks-8.02/src/plugins/astyle/resources/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/astyle/resources/Makefile.am	2009-01-31 13:22:38.000000000 +0100
+@@ -4,4 +4,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ astyle.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/astyle.zip manifest.xml *.xrc > /dev/null
++	zip astyle.zip manifest.xml *.xrc > /dev/null
+diff -urN codeblocks-8.02/src/plugins/autosave/Makefile.am codeblocks-8.02.new/src/plugins/autosave/Makefile.am
+--- codeblocks-8.02/src/plugins/autosave/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/autosave/Makefile.am	2009-01-31 13:22:52.000000000 +0100
+@@ -17,4 +17,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ autosave.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/autosave.zip manifest.xml *.xrc > /dev/null
++	zip autosave.zip manifest.xml *.xrc > /dev/null
+diff -urN codeblocks-8.02/src/plugins/classwizard/resources/Makefile.am codeblocks-8.02.new/src/plugins/classwizard/resources/Makefile.am
+--- codeblocks-8.02/src/plugins/classwizard/resources/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/classwizard/resources/Makefile.am	2009-01-31 13:23:04.000000000 +0100
+@@ -4,4 +4,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ classwizard.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/classwizard.zip manifest.xml *.xrc > /dev/null
++	zip classwizard.zip manifest.xml *.xrc > /dev/null
+diff -urN codeblocks-8.02/src/plugins/codecompletion/resources/Makefile.am codeblocks-8.02.new/src/plugins/codecompletion/resources/Makefile.am
+--- codeblocks-8.02/src/plugins/codecompletion/resources/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/codecompletion/resources/Makefile.am	2009-01-31 13:23:19.000000000 +0100
+@@ -34,7 +34,7 @@
+ 	images/var_public.png
+ 
+ codecompletion.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/codecompletion.zip manifest.xml *.xrc > /dev/null
++	zip codecompletion.zip manifest.xml *.xrc > /dev/null
+ 
+ install-exec-local:
+ 	mkdir -p $(DESTDIR)$(pkgdatadir)/images/codecompletion
+diff -urN codeblocks-8.02/src/plugins/compilergcc/resources/Makefile.am codeblocks-8.02.new/src/plugins/compilergcc/resources/Makefile.am
+--- codeblocks-8.02/src/plugins/compilergcc/resources/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/compilergcc/resources/Makefile.am	2009-01-31 13:23:34.000000000 +0100
+@@ -19,5 +19,5 @@
+ 	images/16x16/stop.png
+ 
+ compiler.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/compiler.zip manifest.xml *.xrc images/*.png images/16x16/*.png > /dev/null
++	zip compiler.zip manifest.xml *.xrc images/*.png images/16x16/*.png > /dev/null
+ 
+diff -urN codeblocks-8.02/src/plugins/contrib/AutoVersioning/Makefile.am codeblocks-8.02.new/src/plugins/contrib/AutoVersioning/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/AutoVersioning/Makefile.am	2007-12-09 18:51:26.000000000 +0100
++++ codeblocks-8.02.new/src/plugins/contrib/AutoVersioning/Makefile.am	2009-01-31 13:25:33.000000000 +0100
+@@ -34,4 +34,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ AutoVersioning.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/AutoVersioning.zip manifest.xml > /dev/null
++	zip AutoVersioning.zip manifest.xml > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/BrowseTracker/Makefile.am codeblocks-8.02.new/src/plugins/contrib/BrowseTracker/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/BrowseTracker/Makefile.am	2008-02-18 21:06:04.000000000 +0100
++++ codeblocks-8.02.new/src/plugins/contrib/BrowseTracker/Makefile.am	2009-01-31 13:30:35.000000000 +0100
+@@ -38,4 +38,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ BrowseTracker.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/BrowseTracker.zip manifest.xml > /dev/null
+\ Brak znaku nowej linii na końcu pliku
++	zip BrowseTracker.zip manifest.xml > /dev/null
+\ Brak znaku nowej linii na końcu pliku
+diff -urN codeblocks-8.02/src/plugins/contrib/byogames/Makefile.am codeblocks-8.02.new/src/plugins/contrib/byogames/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/byogames/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/contrib/byogames/Makefile.am	2009-01-31 13:26:18.000000000 +0100
+@@ -36,4 +36,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ byogames.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/byogames.zip manifest.xml > /dev/null
++	zip byogames.zip manifest.xml > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/cb_koders/Makefile.am codeblocks-8.02.new/src/plugins/contrib/cb_koders/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/cb_koders/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/contrib/cb_koders/Makefile.am	2009-01-31 13:26:30.000000000 +0100
+@@ -24,4 +24,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ cb_koders.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/cb_koders.zip manifest.xml > /dev/null
++	zip cb_koders.zip manifest.xml > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/codesnippets/resources/Makefile.am codeblocks-8.02.new/src/plugins/contrib/codesnippets/resources/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/codesnippets/resources/Makefile.am	2007-08-08 14:16:12.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/contrib/codesnippets/resources/Makefile.am	2009-01-31 13:26:49.000000000 +0100
+@@ -68,7 +68,7 @@
+ EXTRA_DIST = manifest.xml
+ 
+ codesnippets.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/codesnippets.zip manifest.xml > /dev/null
++	zip codesnippets.zip manifest.xml > /dev/null
+ 
+ install-data-local: codesnippets.zip
+ 	$(mkinstalldirs) $(DESTDIR)$(datadir)/@PACKAGE@/; \
+diff -urN codeblocks-8.02/src/plugins/contrib/codestat/resources/Makefile.am codeblocks-8.02.new/src/plugins/contrib/codestat/resources/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/codestat/resources/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/contrib/codestat/resources/Makefile.am	2009-01-31 13:27:05.000000000 +0100
+@@ -4,4 +4,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ codestat.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/codestat.zip manifest.xml *.xrc > /dev/null
++	zip codestat.zip manifest.xml *.xrc > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/dragscroll/Makefile.am codeblocks-8.02.new/src/plugins/contrib/dragscroll/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/dragscroll/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/contrib/dragscroll/Makefile.am	2009-01-31 13:27:25.000000000 +0100
+@@ -24,4 +24,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ dragscroll.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/dragscroll.zip manifest.xml > /dev/null
++	zip dragscroll.zip manifest.xml > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/envvars/Makefile.am codeblocks-8.02.new/src/plugins/contrib/envvars/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/envvars/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/contrib/envvars/Makefile.am	2009-01-31 13:27:39.000000000 +0100
+@@ -20,4 +20,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ envvars.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/envvars.zip manifest.xml *.xrc > /dev/null
++	zip envvars.zip manifest.xml *.xrc > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/help_plugin/Makefile.am codeblocks-8.02.new/src/plugins/contrib/help_plugin/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/help_plugin/Makefile.am	2007-11-15 14:24:03.000000000 +0100
++++ codeblocks-8.02.new/src/plugins/contrib/help_plugin/Makefile.am	2009-01-31 13:27:56.000000000 +0100
+@@ -65,4 +65,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ help_plugin.zip: manifest.xml help_plugin.xrc
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/help_plugin.zip manifest.xml *.xrc *.png > /dev/null
++	zip help_plugin.zip manifest.xml *.xrc *.png > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/keybinder/Makefile.am codeblocks-8.02.new/src/plugins/contrib/keybinder/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/keybinder/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/contrib/keybinder/Makefile.am	2009-01-31 13:28:08.000000000 +0100
+@@ -26,4 +26,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ keybinder.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/keybinder.zip manifest.xml > /dev/null
++	zip keybinder.zip manifest.xml > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/lib_finder/Makefile.am codeblocks-8.02.new/src/plugins/contrib/lib_finder/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/lib_finder/Makefile.am	2008-01-02 00:02:41.000000000 +0100
++++ codeblocks-8.02.new/src/plugins/contrib/lib_finder/Makefile.am	2009-01-31 13:28:19.000000000 +0100
+@@ -50,4 +50,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ lib_finder.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/lib_finder.zip manifest.xml > /dev/null
++	zip lib_finder.zip manifest.xml > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/profiler/resources/Makefile.am codeblocks-8.02.new/src/plugins/contrib/profiler/resources/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/profiler/resources/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/contrib/profiler/resources/Makefile.am	2009-01-31 13:28:43.000000000 +0100
+@@ -4,4 +4,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ Profiler.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/Profiler.zip manifest.xml *.xrc > /dev/null
++	zip Profiler.zip manifest.xml *.xrc > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/regex_testbed/Makefile.am codeblocks-8.02.new/src/plugins/contrib/regex_testbed/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/regex_testbed/Makefile.am	2008-01-13 17:45:24.000000000 +0100
++++ codeblocks-8.02.new/src/plugins/contrib/regex_testbed/Makefile.am	2009-01-31 13:28:56.000000000 +0100
+@@ -24,4 +24,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ RegExTestbed.zip: manifest.xml regexdlg.xrc
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/RegExTestbed.zip manifest.xml regexdlg.xrc > /dev/null
++	zip RegExTestbed.zip manifest.xml regexdlg.xrc > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/source_exporter/Makefile.am codeblocks-8.02.new/src/plugins/contrib/source_exporter/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/source_exporter/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/contrib/source_exporter/Makefile.am	2009-01-31 13:29:09.000000000 +0100
+@@ -35,4 +35,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ exporter.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/exporter.zip manifest.xml > /dev/null
++	zip exporter.zip manifest.xml > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/symtab/resources/Makefile.am codeblocks-8.02.new/src/plugins/contrib/symtab/resources/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/symtab/resources/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/contrib/symtab/resources/Makefile.am	2009-01-31 13:29:21.000000000 +0100
+@@ -4,4 +4,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ SymTab.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/SymTab.zip manifest.xml *.xrc > /dev/null
++	zip SymTab.zip manifest.xml *.xrc > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/ThreadSearch/Makefile.am codeblocks-8.02.new/src/plugins/contrib/ThreadSearch/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/ThreadSearch/Makefile.am	2008-01-13 17:45:24.000000000 +0100
++++ codeblocks-8.02.new/src/plugins/contrib/ThreadSearch/Makefile.am	2009-01-31 13:26:04.000000000 +0100
+@@ -66,5 +66,5 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ ThreadSearch.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/ThreadSearch.zip manifest.xml > /dev/null
++	zip ThreadSearch.zip manifest.xml > /dev/null
+ 
+diff -urN codeblocks-8.02/src/plugins/contrib/wxSmith/Makefile.am codeblocks-8.02.new/src/plugins/contrib/wxSmith/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/wxSmith/Makefile.am	2007-11-07 16:26:51.000000000 +0100
++++ codeblocks-8.02.new/src/plugins/contrib/wxSmith/Makefile.am	2009-01-31 13:29:35.000000000 +0100
+@@ -69,4 +69,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ wxsmith.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/wxsmith.zip manifest.xml > /dev/null
++	zip wxsmith.zip manifest.xml > /dev/null
+diff -urN codeblocks-8.02/src/plugins/contrib/wxSmithContribItems/Makefile.am codeblocks-8.02.new/src/plugins/contrib/wxSmithContribItems/Makefile.am
+--- codeblocks-8.02/src/plugins/contrib/wxSmithContribItems/Makefile.am	2008-01-13 17:45:24.000000000 +0100
++++ codeblocks-8.02.new/src/plugins/contrib/wxSmithContribItems/Makefile.am	2009-01-31 13:29:51.000000000 +0100
+@@ -1,5 +1,4 @@
+ AM_CPPFLAGS = -DWXMAKINGLIB_PROPGRID
+-
+ INCLUDES = $(WX_CXXFLAGS) \
+ 		-I$(top_srcdir)/src/include \
+ 		-I$(top_srcdir)/src/include/wxFlatNotebook/include \
+@@ -33,7 +32,7 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ wxsmithcontribitems.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/wxsmithcontribitems.zip manifest.xml > /dev/null
++	zip wxsmithcontribitems.zip manifest.xml > /dev/null
+ 
+ libwxsmithcontribitems_la_SOURCES = \
+ ./wxchart/wxchart-1.0/src/legendwindow.cpp \
+diff -urN codeblocks-8.02/src/plugins/debuggergdb/resources/Makefile.am codeblocks-8.02.new/src/plugins/debuggergdb/resources/Makefile.am
+--- codeblocks-8.02/src/plugins/debuggergdb/resources/Makefile.am	2008-02-15 10:29:11.000000000 +0100
++++ codeblocks-8.02.new/src/plugins/debuggergdb/resources/Makefile.am	2009-01-31 13:23:54.000000000 +0100
+@@ -37,4 +37,4 @@
+ EXTRA_DIST = $(DEBUG_RESOURCES)
+ 
+ debugger.zip: $(DEBUG_RESOURCES)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/debugger.zip manifest.xml *.xrc images/*.png images/16x16/*.png > /dev/null
++	zip debugger.zip manifest.xml *.xrc images/*.png images/16x16/*.png > /dev/null
+diff -urN codeblocks-8.02/src/plugins/defaultmimehandler/resources/Makefile.am codeblocks-8.02.new/src/plugins/defaultmimehandler/resources/Makefile.am
+--- codeblocks-8.02/src/plugins/defaultmimehandler/resources/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/defaultmimehandler/resources/Makefile.am	2009-01-31 13:24:06.000000000 +0100
+@@ -4,5 +4,5 @@
+ EXTRA_DIST = edit_files_handling.xrc manifest.xml
+ 
+ defaultmimehandler.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/defaultmimehandler.zip manifest.xml *.xrc > /dev/null
++	zip defaultmimehandler.zip manifest.xml *.xrc > /dev/null
+ 
+diff -urN codeblocks-8.02/src/plugins/openfileslist/Makefile.am codeblocks-8.02.new/src/plugins/openfileslist/Makefile.am
+--- codeblocks-8.02/src/plugins/openfileslist/Makefile.am	2007-11-11 10:24:33.000000000 +0100
++++ codeblocks-8.02.new/src/plugins/openfileslist/Makefile.am	2009-01-31 13:24:23.000000000 +0100
+@@ -19,5 +19,5 @@
+ EXTRA_DIST = manifest.xml
+ 
+ openfileslist.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/openfileslist.zip manifest.xml > /dev/null
++	zip openfileslist.zip manifest.xml > /dev/null
+ 
+diff -urN codeblocks-8.02/src/plugins/projectsimporter/resources/Makefile.am codeblocks-8.02.new/src/plugins/projectsimporter/resources/Makefile.am
+--- codeblocks-8.02/src/plugins/projectsimporter/resources/Makefile.am	2007-10-24 06:44:02.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/projectsimporter/resources/Makefile.am	2009-01-31 13:24:35.000000000 +0100
+@@ -4,5 +4,5 @@
+ EXTRA_DIST = project_import_menu.xrc manifest.xml
+ 
+ projectsimporter.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/projectsimporter.zip manifest.xml *.xrc > /dev/null
++	zip projectsimporter.zip manifest.xml *.xrc > /dev/null
+ 
+diff -urN codeblocks-8.02/src/plugins/scriptedwizard/resources/Makefile.am codeblocks-8.02.new/src/plugins/scriptedwizard/resources/Makefile.am
+--- codeblocks-8.02/src/plugins/scriptedwizard/resources/Makefile.am	2007-12-14 15:17:53.000000000 +0100
++++ codeblocks-8.02.new/src/plugins/scriptedwizard/resources/Makefile.am	2009-01-31 13:24:51.000000000 +0100
+@@ -8,7 +8,7 @@
+ EXTRA_DIST = manifest.xml
+ 
+ scriptedwizard.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/scriptedwizard.zip manifest.xml > /dev/null
++	zip scriptedwizard.zip manifest.xml > /dev/null
+ 
+ install-data-local: scriptedwizard.zip
+ 	$(mkinstalldirs) $(DESTDIR)$(datadir)/@PACKAGE@/; \
+diff -urN codeblocks-8.02/src/plugins/todo/resources/Makefile.am codeblocks-8.02.new/src/plugins/todo/resources/Makefile.am
+--- codeblocks-8.02/src/plugins/todo/resources/Makefile.am	2007-08-08 09:36:42.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/todo/resources/Makefile.am	2009-01-31 13:25:05.000000000 +0100
+@@ -4,5 +4,5 @@
+ EXTRA_DIST = manifest.xml $(srcdir)/*.xrc
+ 
+ todo.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/todo.zip manifest.xml *.xrc > /dev/null
++	zip todo.zip manifest.xml *.xrc > /dev/null
+ 
+diff -urN codeblocks-8.02/src/plugins/xpmanifest/Makefile.am codeblocks-8.02.new/src/plugins/xpmanifest/Makefile.am
+--- codeblocks-8.02/src/plugins/xpmanifest/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/plugins/xpmanifest/Makefile.am	2009-01-31 13:25:16.000000000 +0100
+@@ -18,4 +18,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ xpmanifest.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/xpmanifest.zip manifest.xml > /dev/null
++	zip xpmanifest.zip manifest.xml > /dev/null
+diff -urN codeblocks-8.02/src/sdk/resources/Makefile.am codeblocks-8.02.new/src/sdk/resources/Makefile.am
+--- codeblocks-8.02/src/sdk/resources/Makefile.am	2007-07-16 16:07:04.000000000 +0200
++++ codeblocks-8.02.new/src/sdk/resources/Makefile.am	2009-01-31 13:22:08.000000000 +0100
+@@ -7,4 +7,4 @@
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ manager_resources.zip: $(dist_noinst_DATA)
+-	PWD=`pwd` cd $(srcdir) && zip -j $(PWD)/manager_resources.zip *.xrc images/*.png > /dev/null
++	zip -j manager_resources.zip *.xrc images/*.png > /dev/null
+diff -urN codeblocks-8.02/src/src/resources/Makefile.am codeblocks-8.02.new/src/src/resources/Makefile.am
+--- codeblocks-8.02/src/src/resources/Makefile.am	2008-01-25 09:47:58.000000000 +0100
++++ codeblocks-8.02.new/src/src/resources/Makefile.am	2009-01-31 13:21:51.000000000 +0100
+@@ -9,7 +9,9 @@
+ CLEANFILES = $(dist_pkgdata_DATA)
+ 
+ resources.zip: $(srcdir)/*.xrc $(srcdir)/images/*.png $(srcdir)/images/16x16/*.png
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/resources.zip *.xrc images/*.png images/16x16/*.png > /dev/null
++	zip resources.zip *.xrc images/*.png images/16x16/*.png > /dev/null
+ 
+ start_here.zip: $(srcdir)/start_here/*.htm* $(srcdir)/start_here/*.png
+-	PWD=`pwd` cd $(srcdir)/start_here && zip $(PWD)/start_here.zip *.htm* *.png > /dev/null
++	cd start_here && \
++	zip ../start_here.zip *.htm* *.png > /dev/null && \
++	cd ..
