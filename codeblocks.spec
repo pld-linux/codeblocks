@@ -30,6 +30,7 @@ Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}-src.tar.bz2
 Patch0:		%{name}-FHS-plugins.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-ac.patch
+Patch3:		%{name}-pwd.patch
 URL:		http://www.codeblocks.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -156,6 +157,7 @@ find . -type f -and -not -name "*.cpp" -and -not -name "*.h" -and -not -name "*.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 # fix the dir, where plugins are installed
 for p in astyle autosave classwizard codecompletion compilergcc debuggergdb \
