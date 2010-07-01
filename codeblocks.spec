@@ -2,7 +2,7 @@
 #	- snap build from svn
 #
 
-%bcond_with snap     # build snap instead of release
+%bcond_with snap	# build snap instead of release
 
 %if %{with snap}
 %define		_svn	svn5082
@@ -16,19 +16,19 @@ Name:		codeblocks
 Version:	1.0
 Release:	%{_snap}%{_svn}
 %else
-Version:	8.02
+Version:	10.05
 Release:	1
 %endif
 License:	GPL v3
 Group:		X11/Development/Tools
 %if %{with snap}
 Source0:	%{name}-%{_snap}.tar.gz
+# Source0-md5:	ab077d562e98b0586f2f86c14cb773ba
 %else
-Source0:	http://dl.sourceforge.net/codeblocks/%{name}-%{version}-src.tar.bz2
-# Source0-md5:	ac15b4b3de50d7650c2f7a8dbcb30f88
+Source0:	http://download.berlios.de/codeblocks/%{name}-%{version}-src.tar.bz2
+# Source0-md5:	ab077d562e98b0586f2f86c14cb773ba
 %endif
 Patch0:		%{name}-FHS-plugins.patch
-Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-ac.patch
 Patch3:		%{name}-pwd.patch
 URL:		http://www.codeblocks.org/
@@ -150,12 +150,11 @@ instalować ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
 %if %{with snap}
 %setup -q -n %{name}-%{_snap}
 %else
-%setup -q
+%setup -q -n %{name}-%{version}-release
 %endif
 find . -type f -and -not -name "*.cpp" -and -not -name "*.h" -and -not -name "*.png" -and -not -name "*.bmp" -and -not -name "*.c" -and -not -name "*.cxx" -and -not -name "*.ico" | sed "s/.*/\"\\0\"/" | xargs dos2unix
 
 %patch0 -p1
-%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 
@@ -251,15 +250,22 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/lib_finder
 %{_datadir}/%{name}/templates
 %dir %{_libdir}/%{name}
+%dir %{_libdir}/wxSmithContribItems
 %dir %{_pluginsdir}
 %attr(755,root,root) %{_pluginsdir}/*.so
+%attr(755,root,root) %{_libdir}/wxSmithContribItems/*.so.*
 %{_mandir}/man1/*.1*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcodeblocks.so
 %attr(755,root,root) %{_libdir}/libwxsmithlib.so
+%attr(755,root,root) %{_libdir}/wxSmithContribItems/*.so
 %{_libdir}/libcodeblocks.la
 %{_libdir}/libwxsmithlib.la
+%{_libdir}/wxSmithContribItems/*.la
 %{_pkgconfigdir}/codeblocks.pc
+%{_pkgconfigdir}/wxsmith*.pc
 %{_includedir}/codeblocks
+%{_includedir}/wxSmithContribItems
+%{_includedir}/wxsmith

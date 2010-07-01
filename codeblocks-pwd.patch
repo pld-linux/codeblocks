@@ -56,17 +56,15 @@ diff -urN codeblocks-8.02/src/plugins/contrib/AutoVersioning/Makefile.am codeblo
  AutoVersioning.zip: manifest.xml
 -	PWD=`pwd` cd $(srcdir) && zip $(PWD)/AutoVersioning.zip manifest.xml > /dev/null
 +	zip AutoVersioning.zip manifest.xml > /dev/null
-diff -urN codeblocks-8.02/src/plugins/contrib/BrowseTracker/Makefile.am codeblocks-8.02.new/src/plugins/contrib/BrowseTracker/Makefile.am
---- codeblocks-8.02/src/plugins/contrib/BrowseTracker/Makefile.am	2008-02-18 21:06:04.000000000 +0100
-+++ codeblocks-8.02.new/src/plugins/contrib/BrowseTracker/Makefile.am	2009-01-31 13:30:35.000000000 +0100
-@@ -38,4 +38,4 @@
+diff -urNp codeblocks-10.05-release.orig/src/plugins/contrib/BrowseTracker/Makefile.am codeblocks-10.05-release/src/plugins/contrib/BrowseTracker/Makefile.am
+--- codeblocks-10.05-release.orig/src/plugins/contrib/BrowseTracker/Makefile.am	2010-07-01 01:25:12.000000000 +0200
++++ codeblocks-10.05-release/src/plugins/contrib/BrowseTracker/Makefile.am	2010-07-01 01:30:10.000000000 +0200
+@@ -43,4 +43,4 @@ pkgdata_DATA = BrowseTracker.zip
  CLEANFILES = $(pkgdata_DATA)
  
  BrowseTracker.zip: manifest.xml
 -	PWD=`pwd` cd $(srcdir) && zip $(PWD)/BrowseTracker.zip manifest.xml > /dev/null
-\ Brak znaku nowej linii na końcu pliku
 +	zip BrowseTracker.zip manifest.xml > /dev/null
-\ Brak znaku nowej linii na końcu pliku
 diff -urN codeblocks-8.02/src/plugins/contrib/byogames/Makefile.am codeblocks-8.02.new/src/plugins/contrib/byogames/Makefile.am
 --- codeblocks-8.02/src/plugins/contrib/byogames/Makefile.am	2007-07-16 16:07:04.000000000 +0200
 +++ codeblocks-8.02.new/src/plugins/contrib/byogames/Makefile.am	2009-01-31 13:26:18.000000000 +0100
@@ -85,18 +83,16 @@ diff -urN codeblocks-8.02/src/plugins/contrib/cb_koders/Makefile.am codeblocks-8
  cb_koders.zip: manifest.xml
 -	PWD=`pwd` cd $(srcdir) && zip $(PWD)/cb_koders.zip manifest.xml > /dev/null
 +	zip cb_koders.zip manifest.xml > /dev/null
-diff -urN codeblocks-8.02/src/plugins/contrib/codesnippets/resources/Makefile.am codeblocks-8.02.new/src/plugins/contrib/codesnippets/resources/Makefile.am
---- codeblocks-8.02/src/plugins/contrib/codesnippets/resources/Makefile.am	2007-08-08 14:16:12.000000000 +0200
-+++ codeblocks-8.02.new/src/plugins/contrib/codesnippets/resources/Makefile.am	2009-01-31 13:26:49.000000000 +0100
-@@ -68,7 +68,7 @@
+diff -urNp codeblocks-10.05-release.orig/src/plugins/contrib/codesnippets/resources/Makefile.am codeblocks-10.05-release/src/plugins/contrib/codesnippets/resources/Makefile.am
+--- codeblocks-10.05-release.orig/src/plugins/contrib/codesnippets/resources/Makefile.am	2010-07-01 01:25:12.000000000 +0200
++++ codeblocks-10.05-release/src/plugins/contrib/codesnippets/resources/Makefile.am	2010-07-01 01:30:18.000000000 +0200
+@@ -136,5 +136,5 @@ dist_image_DATA =  allsnippets.png \
  EXTRA_DIST = manifest.xml
  
- codesnippets.zip: manifest.xml
+ codesnippets.zip: $(EXTRA_DIST)
 -	PWD=`pwd` cd $(srcdir) && zip $(PWD)/codesnippets.zip manifest.xml > /dev/null
 +	zip codesnippets.zip manifest.xml > /dev/null
  
- install-data-local: codesnippets.zip
- 	$(mkinstalldirs) $(DESTDIR)$(datadir)/@PACKAGE@/; \
 diff -urN codeblocks-8.02/src/plugins/contrib/codestat/resources/Makefile.am codeblocks-8.02.new/src/plugins/contrib/codestat/resources/Makefile.am
 --- codeblocks-8.02/src/plugins/contrib/codestat/resources/Makefile.am	2007-07-16 16:07:04.000000000 +0200
 +++ codeblocks-8.02.new/src/plugins/contrib/codestat/resources/Makefile.am	2009-01-31 13:27:05.000000000 +0100
@@ -318,3 +314,90 @@ diff -urN codeblocks-8.02/src/src/resources/Makefile.am codeblocks-8.02.new/src/
 +	cd start_here && \
 +	zip ../start_here.zip *.htm* *.png > /dev/null && \
 +	cd ..
+diff -urNp codeblocks-10.05-release.orig/src/plugins/contrib/Cccc/resources/Makefile.am codeblocks-10.05-release/src/plugins/contrib/Cccc/resources/Makefile.am
+--- codeblocks-10.05-release.orig/src/plugins/contrib/Cccc/resources/Makefile.am	2010-07-01 01:18:29.000000000 +0200
++++ codeblocks-10.05-release/src/plugins/contrib/Cccc/resources/Makefile.am	2010-07-01 01:29:14.000000000 +0200
+@@ -4,4 +4,4 @@ pkgdata_DATA = Cccc.zip
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ Cccc.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/Cccc.zip manifest.xml > /dev/null
++	zip Cccc.zip manifest.xml > /dev/null
+diff -urNp codeblocks-10.05-release.orig/src/plugins/contrib/copystrings/Makefile.am codeblocks-10.05-release/src/plugins/contrib/copystrings/Makefile.am
+--- codeblocks-10.05-release.orig/src/plugins/contrib/copystrings/Makefile.am	2010-07-01 01:18:29.000000000 +0200
++++ codeblocks-10.05-release/src/plugins/contrib/copystrings/Makefile.am	2010-07-01 01:29:30.000000000 +0200
+@@ -22,4 +22,4 @@ pkgdata_DATA = copystrings.zip
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ copystrings.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/copystrings.zip manifest.xml > /dev/null
++	zip copystrings.zip manifest.xml > /dev/null
+diff -urNp codeblocks-10.05-release.orig/src/plugins/contrib/CppCheck/resources/Makefile.am codeblocks-10.05-release/src/plugins/contrib/CppCheck/resources/Makefile.am
+--- codeblocks-10.05-release.orig/src/plugins/contrib/CppCheck/resources/Makefile.am	2010-07-01 01:18:29.000000000 +0200
++++ codeblocks-10.05-release/src/plugins/contrib/CppCheck/resources/Makefile.am	2010-07-01 01:30:24.000000000 +0200
+@@ -4,4 +4,4 @@ pkgdata_DATA = CppCheck.zip
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ CppCheck.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/CppCheck.zip manifest.xml > /dev/null
++	zip CppCheck.zip manifest.xml > /dev/null
+diff -urNp codeblocks-10.05-release.orig/src/plugins/contrib/headerfixup/Makefile.am codeblocks-10.05-release/src/plugins/contrib/headerfixup/Makefile.am
+--- codeblocks-10.05-release.orig/src/plugins/contrib/headerfixup/Makefile.am	2010-07-01 01:18:29.000000000 +0200
++++ codeblocks-10.05-release/src/plugins/contrib/headerfixup/Makefile.am	2010-07-01 01:29:22.000000000 +0200
+@@ -39,4 +39,4 @@ pkgdata_DATA = headerfixup.zip
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ headerfixup.zip:
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/headerfixup.zip manifest.xml > /dev/null
++	zip headerfixup.zip manifest.xml > /dev/null
+diff -urNp codeblocks-10.05-release.orig/src/plugins/contrib/HexEditor/Makefile.am codeblocks-10.05-release/src/plugins/contrib/HexEditor/Makefile.am
+--- codeblocks-10.05-release.orig/src/plugins/contrib/HexEditor/Makefile.am	2010-07-01 01:18:29.000000000 +0200
++++ codeblocks-10.05-release/src/plugins/contrib/HexEditor/Makefile.am	2010-07-01 01:29:38.000000000 +0200
+@@ -67,4 +67,4 @@ pkgdata_DATA = HexEditor.zip
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ HexEditor.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/HexEditor.zip manifest.xml > /dev/null
++	zip HexEditor.zip manifest.xml > /dev/null
+diff -urNp codeblocks-10.05-release.orig/src/plugins/contrib/IncrementalSearch/Makefile.am codeblocks-10.05-release/src/plugins/contrib/IncrementalSearch/Makefile.am
+--- codeblocks-10.05-release.orig/src/plugins/contrib/IncrementalSearch/Makefile.am	2010-07-01 01:18:29.000000000 +0200
++++ codeblocks-10.05-release/src/plugins/contrib/IncrementalSearch/Makefile.am	2010-07-01 01:29:57.000000000 +0200
+@@ -30,7 +30,7 @@ pkgdata_DATA = IncrementalSearch.zip
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ IncrementalSearch.zip: manifest.xml IncrementalSearchToolbar.xrc IncrementalSearchConfDlg.xrc
+-	PWD=`pwd` cd $(srcdir) && zip -R $(PWD)/IncrementalSearch.zip manifest.xml *.xrc images/*.png images/16x16/*.png > /dev/null
++	zip -R IncrementalSearch.zip manifest.xml *.xrc images/*.png images/16x16/*.png > /dev/null
+ 
+ confimagesdir = $(datadir)/@PACKAGE@/images/settings
+ 
+diff -urNp codeblocks-10.05-release.orig/src/plugins/contrib/MouseSap/Makefile.am codeblocks-10.05-release/src/plugins/contrib/MouseSap/Makefile.am
+--- codeblocks-10.05-release.orig/src/plugins/contrib/MouseSap/Makefile.am	2010-07-01 01:18:29.000000000 +0200
++++ codeblocks-10.05-release/src/plugins/contrib/MouseSap/Makefile.am	2010-07-01 01:29:01.000000000 +0200
+@@ -23,4 +23,4 @@ pkgdata_DATA = MouseSap.zip
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ MouseSap.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/MouseSap.zip manifest.xml > /dev/null
++	zip MouseSap.zip manifest.xml > /dev/null
+diff -urNp codeblocks-10.05-release.orig/src/plugins/contrib/Valgrind/resources/Makefile.am codeblocks-10.05-release/src/plugins/contrib/Valgrind/resources/Makefile.am
+--- codeblocks-10.05-release.orig/src/plugins/contrib/Valgrind/resources/Makefile.am	2010-07-01 01:18:29.000000000 +0200
++++ codeblocks-10.05-release/src/plugins/contrib/Valgrind/resources/Makefile.am	2010-07-01 01:30:04.000000000 +0200
+@@ -4,4 +4,4 @@ pkgdata_DATA = Valgrind.zip
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ Valgrind.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/Valgrind.zip manifest.xml > /dev/null
++	zip Valgrind.zip manifest.xml > /dev/null
+diff -urNp codeblocks-10.05-release.orig/src/plugins/contrib/wxSmithAui/Makefile.am codeblocks-10.05-release/src/plugins/contrib/wxSmithAui/Makefile.am
+--- codeblocks-10.05-release.orig/src/plugins/contrib/wxSmithAui/Makefile.am	2010-07-01 01:18:29.000000000 +0200
++++ codeblocks-10.05-release/src/plugins/contrib/wxSmithAui/Makefile.am	2010-07-01 01:29:47.000000000 +0200
+@@ -29,7 +29,7 @@ pkgdata_DATA = wxSmithAui.zip
+ CLEANFILES = $(pkgdata_DATA)
+ 
+ wxSmithAui.zip: manifest.xml
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/wxSmithAui.zip manifest.xml > /dev/null
++	zip wxSmithAui.zip manifest.xml > /dev/null
+ 
+ libwxSmithAui_la_SOURCES = \
+ ./wxAuiManager/wxsAuiManager.cpp \
