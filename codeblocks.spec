@@ -34,7 +34,6 @@ URL:		http://www.codeblocks.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
-BuildRequires:	dos2unix
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
@@ -151,34 +150,13 @@ instalować ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
 %else
 %setup -q -n %{name}-%{version}-release
 %endif
-find . -type f -and -not -name "*.cpp" -and -not -name "*.h" -and -not -name "*.png" -and -not -name "*.bmp" -and -not -name "*.c" -and -not -name "*.cxx" -and -not -name "*.ico" | sed "s/.*/\"\\0\"/" | xargs dos2unix
 
 %patch0 -p1
 %patch2 -p1
 %patch3 -p1
 
-# fix the dir, where plugins are installed
-for p in astyle autosave classwizard codecompletion compilergcc debuggergdb \
-defaultmimehandler openfileslist projectsimporter scriptedwizard todo xpmanifest
-do
-	sed -i 's|$(pkgdatadir)/plugins|@libdir@/@PACKAGE@/plugins|' src/plugins/$p/Makefile.*
-done
-
-for p in AutoVersioning BrowseTracker ThreadSearch byogames cb_koders \
-codesnippets codestat dragscroll envvars help_plugin keybinder lib_finder \
-profiler regex_testbed source_exporter symtab wxSmith wxSmithContribItems
-do
-	sed -i 's|$(pkgdatadir)/plugins|@libdir@/@PACKAGE@/plugins|' src/plugins/contrib/$p/Makefile.*
-done
-
-sed -i 's|$(pkgdatadir)/plugins|@libdir@/@PACKAGE@/plugins|' src/plugins/contrib/wxSmith/plugin/Makefile.*
-
 #hardcode libdir, continue of patch0
 sed -i 's|@libdir@|%{_libdir}|' src/sdk/configmanager.cpp
-
-# remove execute bits from source files
-find src/plugins/contrib/regex_testbed -type f -exec chmod a-x {} ';'
-find src/plugins/compilergcc -type f -exec chmod a-x {} ';'
 
 # fix version inside the configure script
 sed -i 's/1\.0svn/%{version}/g' revision.m4
