@@ -23,7 +23,6 @@ License:	GPL v3
 Group:		X11/Development/Tools
 %if %{with snap}
 Source0:	%{name}-%{_snap}.tar.gz
-# Source0-md5:	ab077d562e98b0586f2f86c14cb773ba
 %else
 Source0:	http://download.berlios.de/codeblocks/%{name}-%{version}-src.tar.bz2
 # Source0-md5:	ab077d562e98b0586f2f86c14cb773ba
