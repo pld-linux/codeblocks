@@ -34,6 +34,7 @@ URL:		http://www.codeblocks.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
+BuildRequires:	gtk+2-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
