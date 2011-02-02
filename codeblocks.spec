@@ -1,32 +1,13 @@
-#TODO
-#	- snap build from svn
-#
-
-%bcond_with snap	# build snap instead of release
-
-%if %{with snap}
-%define		_svn	svn5082
-%define		_snap	20080531
-%endif
 
 Summary:	An open source, cross platform, free C++ IDE
 Summary(pl.UTF-8):	Wieloplatformowe, darmowe IDE do C++ o otwartych źródłach
 Name:		codeblocks
-%if %{with snap}
-Version:	1.0
-Release:	%{_snap}%{_svn}
-%else
 Version:	10.05
 Release:	1
-%endif
 License:	GPL v3
 Group:		X11/Development/Tools
-%if %{with snap}
-Source0:	%{name}-%{_snap}.tar.gz
-%else
 Source0:	http://download.berlios.de/codeblocks/%{name}-%{version}-src.tar.bz2
 # Source0-md5:	ab077d562e98b0586f2f86c14cb773ba
-%endif
 Patch0:		%{name}-FHS-plugins.patch
 Patch2:		%{name}-ac.patch
 Patch3:		%{name}-pwd.patch
@@ -146,11 +127,7 @@ Ten pakiet dostarcza plików nagłówkowych Code::Blocks. Należy
 instalować ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
 
 %prep
-%if %{with snap}
-%setup -q -n %{name}-%{_snap}
-%else
 %setup -q -n %{name}-%{version}-release
-%endif
 
 %patch0 -p1
 %patch2 -p1
@@ -163,10 +140,6 @@ sed -i 's|@libdir@|%{_libdir}|' src/sdk/configmanager.cpp
 sed -i 's/1\.0svn/%{version}/g' revision.m4
 
 %build
-%if %{with snap}
-chmod a+x update_revision.sh
-./update_revision.sh
-%endif
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
