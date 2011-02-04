@@ -3,7 +3,7 @@ Summary:	An open source, cross platform, free C++ IDE
 Summary(pl.UTF-8):	Wieloplatformowe, darmowe IDE do C++ o otwartych źródłach
 Name:		codeblocks
 Version:	10.05
-Release:	1
+Release:	2
 License:	GPL v3
 Group:		X11/Development/Tools
 Source0:	http://download.berlios.de/codeblocks/%{name}-%{version}-src.tar.bz2
@@ -24,7 +24,7 @@ BuildRequires:	wxGTK2-unicode-devel >= 2.8.0
 BuildRequires:	zip
 BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	gtk+2
+Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
