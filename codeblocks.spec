@@ -3,7 +3,7 @@ Summary:	An open source, cross platform, free C++ IDE
 Summary(pl.UTF-8):	Wieloplatformowe, darmowe IDE do C++ o otwartych źródłach
 Name:		codeblocks
 Version:	10.05
-Release:	2
+Release:	3
 License:	GPL v3
 Group:		X11/Development/Tools
 Source0:	http://download.berlios.de/codeblocks/%{name}-%{version}-src.tar.bz2
