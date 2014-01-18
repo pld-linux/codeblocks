@@ -2,13 +2,13 @@ diff -urN codeblocks-8.02/acinclude.m4 codeblocks-8.02.new/acinclude.m4
 --- codeblocks-8.02/acinclude.m4.orig	2010-07-01 01:18:30.000000000 +0200
 +++ codeblocks-8.02/acinclude.m4	2010-07-01 01:23:01.000000000 +0200
 @@ -71,8 +71,8 @@ if test "x$enable_debug" = "xyes"; then
-          CXXFLAGS="-g -DDEBUG -DCB_AUTOCONF $CXXFLAGS"
- 	AC_MSG_RESULT(yes)
- else
--	CFLAGS="-O2 -ffast-math -DCB_AUTOCONF $CFLAGS"
--	CXXFLAGS="-O2 -ffast-math -DCB_AUTOCONF $CXXFLAGS"
-+	CFLAGS="-Wall -ffast-math -DCB_AUTOCONF $CFLAGS"
-+	CXXFLAGS="-Wall -ffast-math -DCB_AUTOCONF $CXXFLAGS"
- 	AC_MSG_RESULT(no)
- fi
- 
+         LDFLAGS="-Wl,--no-undefined"
+         AC_MSG_RESULT(yes)
+     else
+-        CFLAGS="-O2 -ffast-math -DCB_AUTOCONF $CFLAGS"
+-        CXXFLAGS="-O2 -ffast-math -DCB_AUTOCONF $CXXFLAGS"
++        CFLAGS="-Wall -ffast-math -DCB_AUTOCONF $CFLAGS"
++        CXXFLAGS="-Wall -ffast-math -DCB_AUTOCONF $CXXFLAGS"
+         LDFLAGS="-Wl,--no-undefined"
+         AC_MSG_RESULT(no)
+     fi

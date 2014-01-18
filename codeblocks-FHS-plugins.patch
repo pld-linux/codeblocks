@@ -5,8 +5,8 @@ diff -urN codeblocks-8.02_orig/src/sdk/configmanager.cpp codeblocks-8.02/src/sdk
  
          case sdPluginsGlobal:
  #ifndef CB_AUTOCONF
--            return ConfigManager::data_path_global + _T("/plugins");
-+            // return ConfigManager::data_path_global + _T("/plugins");
+-            return ConfigManager::data_path_global + wxFILE_SEP_PATH + _T("plugins");
++            // return ConfigManager::data_path_global + wxFILE_SEP_PATH + _T("plugins");
 +            return _T("@libdir@/codeblocks/plugins");
  #else
              return ConfigManager::plugin_path_global;

@@ -2,12 +2,12 @@
 Summary:	An open source, cross platform, free C++ IDE
 Summary(pl.UTF-8):	Wieloplatformowe, darmowe IDE do C++ o otwartych źródłach
 Name:		codeblocks
-Version:	10.05
-Release:	3
+Version:	13.12
+Release:	1
 License:	GPL v3
 Group:		X11/Development/Tools
-Source0:	http://download.berlios.de/codeblocks/%{name}-%{version}-src.tar.bz2
-# Source0-md5:	ab077d562e98b0586f2f86c14cb773ba
+Source0:	http://download.sourceforge.net/codeblocks/%{name}_%{version}-1.tar.gz
+# Source0-md5:	4b450f620d9f1875ecf6882ab3c11402
 Patch0:		%{name}-FHS-plugins.patch
 Patch2:		%{name}-ac.patch
 Patch3:		%{name}-pwd.patch
@@ -19,6 +19,7 @@ BuildRequires:	gtk+2-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
+BuildRequires:	hunspell-devel
 BuildRequires:	unixODBC-devel
 BuildRequires:	wxGTK2-unicode-devel >= 2.8.0
 BuildRequires:	zip
@@ -127,8 +128,7 @@ Ten pakiet dostarcza plików nagłówkowych Code::Blocks. Należy
 instalować ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
 
 %prep
-%setup -q -n %{name}-%{version}-release
-
+%setup -q
 %patch0 -p1
 %patch2 -p1
 %patch3 -p1
@@ -158,7 +158,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	mimeicondir=%{_iconsdir}/hicolor/48x48/mimetypes
 
-rm -f $RPM_BUILD_ROOT%{_pluginsdir}/*.la
+%{__rm} $RPM_BUILD_ROOT%{_pluginsdir}/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/{codeblocks/wxContribItems/,}*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -195,28 +196,27 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/scripts/*
 %{_datadir}/%{name}/*.zip
 %{_datadir}/%{name}/*.txt
+%{_datadir}/%{name}/SpellChecker
+%{_datadir}/%{name}/compilers
 %{_datadir}/%{name}/icons
 %{_datadir}/%{name}/images
 %{_datadir}/%{name}/lexers
 %{_datadir}/%{name}/lib_finder
 %{_datadir}/%{name}/templates
 %dir %{_libdir}/%{name}
-%dir %{_libdir}/wxSmithContribItems
+%dir %{_libdir}/%{name}/wxContribItems
 %dir %{_pluginsdir}
 %attr(755,root,root) %{_pluginsdir}/*.so
-%attr(755,root,root) %{_libdir}/wxSmithContribItems/*.so.*
+%attr(755,root,root) %{_libdir}/%{name}/wxContribItems/*.so.*
 %{_mandir}/man1/*.1*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcodeblocks.so
 %attr(755,root,root) %{_libdir}/libwxsmithlib.so
-%attr(755,root,root) %{_libdir}/wxSmithContribItems/*.so
-%{_libdir}/libcodeblocks.la
-%{_libdir}/libwxsmithlib.la
-%{_libdir}/wxSmithContribItems/*.la
+%attr(755,root,root) %{_libdir}/%{name}/wxContribItems/*.so
+%{_pkgconfigdir}/cb_*.pc
 %{_pkgconfigdir}/codeblocks.pc
 %{_pkgconfigdir}/wxsmith*.pc
 %{_includedir}/codeblocks
-%{_includedir}/wxSmithContribItems
 %{_includedir}/wxsmith
