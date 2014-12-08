@@ -3,7 +3,7 @@ Summary:	An open source, cross platform, free C++ IDE
 Summary(pl.UTF-8):	Wieloplatformowe, darmowe IDE do C++ o otwartych źródłach
 Name:		codeblocks
 Version:	13.12
-Release:	2
+Release:	3
 License:	GPL v3
 Group:		X11/Development/Tools
 Source0:	http://download.sourceforge.net/codeblocks/%{name}_%{version}-1.tar.gz
@@ -15,6 +15,7 @@ URL:		http://www.codeblocks.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
+BuildRequires:	gamin-devel
 BuildRequires:	gtk+2-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
