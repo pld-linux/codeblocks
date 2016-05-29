@@ -2,12 +2,12 @@
 Summary:	An open source, cross platform, free C++ IDE
 Summary(pl.UTF-8):	Wieloplatformowe, darmowe IDE do C++ o otwartych źródłach
 Name:		codeblocks
-Version:	13.12
-Release:	3
+Version:	16.01
+Release:	1
 License:	GPL v3
 Group:		X11/Development/Tools
-Source0:	http://download.sourceforge.net/codeblocks/%{name}_%{version}-1.tar.gz
-# Source0-md5:	4b450f620d9f1875ecf6882ab3c11402
+Source0:	http://download.sourceforge.net/codeblocks/%{name}_%{version}.tar.gz
+# Source0-md5:	823f6c229692367ff74f52098b887b6b
 Patch0:		%{name}-FHS-plugins.patch
 Patch2:		%{name}-ac.patch
 Patch3:		%{name}-pwd.patch
@@ -129,7 +129,7 @@ Ten pakiet dostarcza plików nagłówkowych Code::Blocks. Należy
 instalować ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}.release
 %patch0 -p1
 %patch2 -p1
 %patch3 -p1
@@ -181,9 +181,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS BUGS COMPILERS README TODO ChangeLog
 %attr(755,root,root) %{_bindir}/cb_share_config
-%attr(755,root,root) %{_bindir}/codeblocks
-%attr(755,root,root) %{_bindir}/codesnippets
 %attr(755,root,root) %{_bindir}/cb_console_runner
+%attr(755,root,root) %{_bindir}/codeblocks
 %attr(755,root,root) %{_libdir}/libwxsmithlib.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libwxsmithlib.so.0
 %attr(755,root,root) %{_libdir}/libcodeblocks.so.*.*.*

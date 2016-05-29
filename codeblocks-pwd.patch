@@ -75,8 +75,8 @@ diff -ur codeblocks-13.12/src/plugins/contrib/BrowseTracker/Makefile.am codebloc
  CLEANFILES = $(pkgdata_DATA)
  
  BrowseTracker.zip: manifest.xml
--	PWD=`pwd` cd $(srcdir) && zip $(PWD)/BrowseTracker.zip manifest.xml > /dev/null
-+	zip $(PWD)/BrowseTracker.zip manifest.xml > /dev/null
+-	PWD=`pwd` cd $(srcdir) && zip -R $(PWD)/BrowseTracker.zip manifest.xml *.xrc images/*.png images/16x16/*.png > /dev/null
++	zip -R $(PWD)/BrowseTracker.zip manifest.xml *.xrc images/*.png images/16x16/*.png > /dev/null
 diff -ur codeblocks-13.12/src/plugins/contrib/byogames/Makefile.am codeblocks-13.12.pwd/src/plugins/contrib/byogames/Makefile.am
 --- codeblocks-13.12/src/plugins/contrib/byogames/Makefile.am	2013-11-17 20:34:09.000000000 +0100
 +++ codeblocks-13.12.pwd/src/plugins/contrib/byogames/Makefile.am	2014-01-18 19:35:30.548711201 +0100
@@ -204,9 +204,9 @@ diff -ur codeblocks-13.12/src/plugins/contrib/FileManager/Makefile.am codeblocks
 @@ -41,4 +41,4 @@
  CLEANFILES = $(pkgdata_DATA)
  
- FileManager.zip: manifest.xml Resources/fileexplorersettings.xrc
--	PWD=`pwd` cd $(srcdir) && zip -j9 $(PWD)/FileManager.zip manifest.xml Resources/fileexplorersettings.xrc > /dev/null
-+	zip -j9 $(PWD)/FileManager.zip manifest.xml Resources/fileexplorersettings.xrc > /dev/null
+ FileManager.zip: manifest.xml Resources/fileexplorersettings.xrc Resources/CommitBrowser.xrc
+-	PWD=`pwd` cd $(srcdir) && zip -j9 $(PWD)/FileManager.zip manifest.xml Resources/fileexplorersettings.xrc Resources/CommitBrowser.xrc > /dev/null
++	zip -j9 $(PWD)/FileManager.zip manifest.xml Resources/fileexplorersettings.xrc Resources/CommitBrowser.xrc > /dev/null
 diff -ur codeblocks-13.12/src/plugins/contrib/headerfixup/Makefile.am codeblocks-13.12.pwd/src/plugins/contrib/headerfixup/Makefile.am
 --- codeblocks-13.12/src/plugins/contrib/headerfixup/Makefile.am	2013-11-17 20:34:08.000000000 +0100
 +++ codeblocks-13.12.pwd/src/plugins/contrib/headerfixup/Makefile.am	2014-01-18 19:35:30.548711201 +0100
