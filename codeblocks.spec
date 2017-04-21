@@ -3,7 +3,7 @@ Summary:	An open source, cross platform, free C++ IDE
 Summary(pl.UTF-8):	Wieloplatformowe, darmowe IDE do C++ o otwartych źródłach
 Name:		codeblocks
 Version:	16.01
-Release:	2
+Release:	3
 License:	GPL v3
 Group:		X11/Development/Tools
 Source0:	http://download.sourceforge.net/codeblocks/%{name}_%{version}.tar.gz
@@ -11,6 +11,7 @@ Source0:	http://download.sourceforge.net/codeblocks/%{name}_%{version}.tar.gz
 Patch0:		%{name}-FHS-plugins.patch
 Patch2:		%{name}-ac.patch
 Patch3:		%{name}-pwd.patch
+Patch4:		gcc6.patch
 URL:		http://www.codeblocks.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -133,6 +134,7 @@ instalować ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
 %patch0 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 #hardcode libdir, continue of patch0
 sed -i 's|@libdir@|%{_libdir}|' src/sdk/configmanager.cpp
@@ -146,6 +148,7 @@ sed -i 's/1\.0svn/%{version}/g' revision.m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
+export CXXFLAGS="%{rpmcxxflags} -std=c++11"
 %configure \
 	--with-wx-config=wx-gtk2-unicode-config \
 	--with-contrib-plugins=all
