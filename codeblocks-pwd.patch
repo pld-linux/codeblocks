@@ -8,15 +8,14 @@ diff -ur codeblocks-13.12/src/plugins/abbreviations/resources/Makefile.am codebl
 -	PWD=`pwd` cd $(srcdir) && zip $(PWD)/abbreviations.zip manifest.xml *.xrc > /dev/null
 +	zip $(PWD)/abbreviations.zip manifest.xml *.xrc > /dev/null
  
-diff -ur codeblocks-13.12/src/plugins/astyle/resources/Makefile.am codeblocks-13.12.pwd/src/plugins/astyle/resources/Makefile.am
---- codeblocks-13.12/src/plugins/astyle/resources/Makefile.am	2013-11-17 20:34:12.000000000 +0100
-+++ codeblocks-13.12.pwd/src/plugins/astyle/resources/Makefile.am	2014-01-18 19:35:30.545377868 +0100
+--- codeblocks-17.12/src/plugins/astyle/resources/Makefile.am.orig	2019-04-19 18:33:51.130049573 +0200
++++ codeblocks-17.12/src/plugins/astyle/resources/Makefile.am	2019-04-19 18:35:38.729466657 +0200
 @@ -4,4 +4,4 @@
  CLEANFILES = $(pkgdata_DATA)
  
- astyle.zip: $(EXTRA_DIST)
--	PWD=`pwd` cd $(srcdir) && zip $(PWD)/astyle.zip manifest.xml *.xrc > /dev/null
-+	zip $(PWD)/astyle.zip manifest.xml *.xrc > /dev/null
+ Astyle.zip: $(EXTRA_DIST)
+-	PWD=`pwd` cd $(srcdir) && zip $(PWD)/Astyle.zip manifest.xml *.xrc > /dev/null
++	zip $(PWD)/Astyle.zip manifest.xml *.xrc > /dev/null
 diff -ur codeblocks-13.12/src/plugins/autosave/Makefile.am codeblocks-13.12.pwd/src/plugins/autosave/Makefile.am
 --- codeblocks-13.12/src/plugins/autosave/Makefile.am	2013-11-17 20:33:50.000000000 +0100
 +++ codeblocks-13.12.pwd/src/plugins/autosave/Makefile.am	2014-01-18 19:35:30.545377868 +0100

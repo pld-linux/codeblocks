@@ -1,37 +1,52 @@
+#
+# Conditional build:
+%bcond_with	gtk2	# GTK+ 2.x instead of 3.x
 
 Summary:	An open source, cross platform, free C++ IDE
 Summary(pl.UTF-8):	Wieloplatformowe, darmowe IDE do C++ o otwartych źródłach
 Name:		codeblocks
-Version:	16.01
-Release:	3
+Version:	17.12
+Release:	1
 License:	GPL v3
 Group:		X11/Development/Tools
-Source0:	http://download.sourceforge.net/codeblocks/%{name}_%{version}.tar.gz
-# Source0-md5:	823f6c229692367ff74f52098b887b6b
+Source0:	http://download.sourceforge.net/codeblocks/%{name}_%{version}.tar.xz
+# Source0-md5:	e7fb4fcf099fffe944b48af113944a81
 Patch0:		%{name}-FHS-plugins.patch
 Patch2:		%{name}-ac.patch
 Patch3:		%{name}-pwd.patch
-Patch4:		gcc6.patch
+Patch4:		%{name}-astyle-3.1.patch
 URL:		http://www.codeblocks.org/
+BuildRequires:	astyle-devel >= 3.0
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
+BuildRequires:	boost-devel
 BuildRequires:	bzip2-devel
+BuildRequires:	fontconfig-devel
 BuildRequires:	gamin-devel
-BuildRequires:	gtk+2-devel
-BuildRequires:	libtool
+BuildRequires:	glib2-devel >= 2.0
+%{?with_gtk2:BuildRequires:	gtk+2-devel >= 1:2.0.0}
+%{!?with_gtk2:BuildRequires:	gtk+3-devel >= 3.0.0}
+BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	libtool >= 2:2
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
+# pkgconfig(squirrel)
+BuildRequires:	squirrel-devel >= 2.2.5
 BuildRequires:	hunspell-devel
 BuildRequires:	unixODBC-devel
-BuildRequires:	wxGTK2-unicode-devel >= 2.8.0
+BuildRequires:	tar >= 1:1.22
+# pkgconfig(tinyxml)
+BuildRequires:	tinyxml-devel >= 2.6.2-8
+%{?with_gtk2:BuildRequires:	wxGTK2-unicode-devel >= 2.8.12}
+%{!?with_gtk2:BuildRequires:	wxGTK3-unicode-devel >= 2.8.12}
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xz
 BuildRequires:	zip
 BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_pluginsdir %{_libdir}/%{name}/plugins
 
 %description
 Code::Blocks is a free C++ IDE built specifically to meet the most
@@ -130,28 +145,33 @@ Ten pakiet dostarcza plików nagłówkowych Code::Blocks. Należy
 instalować ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
 
 %prep
-%setup -q -n %{name}-%{version}.release
+%setup -q
 %patch0 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 
-#hardcode libdir, continue of patch0
+# hardcode libdir, continue of patch0
 sed -i 's|@libdir@|%{_libdir}|' src/sdk/configmanager.cpp
 
 # fix version inside the configure script
-sed -i 's/1\.0svn/%{version}/g' revision.m4
+sed -i 's/svn[0-9]\+//g' revision.m4
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-export CXXFLAGS="%{rpmcxxflags} -std=c++11"
+CXXFLAGS="%{rpmcxxflags} -std=c++11"
 %configure \
+	--with-boost-system=boost_system \
+	--with-contrib-plugins=all \
+%if %{with gtk2}
 	--with-wx-config=wx-gtk2-unicode-config \
-	--with-contrib-plugins=all
+%else
+	--with-wx-config=wx-gtk3-unicode-config
+%endif
 
 %{__make}
 
@@ -162,8 +182,12 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	mimeicondir=%{_iconsdir}/hicolor/48x48/mimetypes
 
-%{__rm} $RPM_BUILD_ROOT%{_pluginsdir}/*.la
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/{codeblocks/wxContribItems/,}*.la
+# loadable plugins
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/codeblocks/plugins/*.la
+# private libraries
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/codeblocks/wxContribItems/*.la
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -191,8 +215,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libcodeblocks.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libcodeblocks.so.0
 %{_desktopdir}/codeblocks.desktop
-%{_pixmapsdir}/*.png
-%{_iconsdir}/hicolor/48x48/mimetypes/*.png
+%{_pixmapsdir}/codeblocks.png
+%{_iconsdir}/hicolor/48x48/mimetypes/application-x-codeblocks*.png
+%{_datadir}/appdata/codeblocks.appdata.xml
+%{_datadir}/appdata/codeblocks-contrib.metainfo.xml
 %{_datadir}/mime/packages/codeblocks.xml
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/scripts
@@ -207,18 +233,21 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/lib_finder
 %{_datadir}/%{name}/templates
 %dir %{_libdir}/%{name}
+%dir %{_libdir}/%{name}/plugins
+%attr(755,root,root) %{_libdir}/%{name}/plugins/*.so
 %dir %{_libdir}/%{name}/wxContribItems
-%dir %{_pluginsdir}
-%attr(755,root,root) %{_pluginsdir}/*.so
-%attr(755,root,root) %{_libdir}/%{name}/wxContribItems/*.so.*
-%{_mandir}/man1/*.1*
+%attr(755,root,root) %{_libdir}/%{name}/wxContribItems/libwx*.so.*
+%{_mandir}/man1/cb_console_runner.1*
+%{_mandir}/man1/cb_share_config.1*
+%{_mandir}/man1/codeblocks.1*
+%{_mandir}/man1/codesnippets.1*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcodeblocks.so
 %attr(755,root,root) %{_libdir}/libwxsmithlib.so
-%attr(755,root,root) %{_libdir}/%{name}/wxContribItems/*.so
-%{_pkgconfigdir}/cb_*.pc
+%attr(755,root,root) %{_libdir}/%{name}/wxContribItems/libwx*.so
+%{_pkgconfigdir}/cb_wx*.pc
 %{_pkgconfigdir}/codeblocks.pc
 %{_pkgconfigdir}/wxsmith*.pc
 %{_includedir}/codeblocks
