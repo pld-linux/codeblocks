@@ -1,0 +1,11 @@
+--- codeblocks-20.03svn13361/src/plugins/contrib/SmartIndent/Makefile.am~	2023-09-26 10:56:06.000000000 +0200
++++ codeblocks-20.03svn13361/src/plugins/contrib/SmartIndent/Makefile.am	2023-09-27 01:38:58.903559022 +0200
+@@ -99,7 +99,7 @@
+ 
+ CLEANFILES = $(pkgdata_DATA)
+ 
+-.NOTPARALLEL: $(pkgdata_DATA)
++.NOTPARALLEL:
+ 
+ SmartIndentHDL.zip: manifest_hdl.xml
+ 	PWD=`pwd` cd $(srcdir) && \

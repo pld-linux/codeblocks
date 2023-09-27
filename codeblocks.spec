@@ -5,16 +5,17 @@
 Summary:	An open source, cross platform, free C++ IDE
 Summary(pl.UTF-8):	Wieloplatformowe, darmowe IDE do C++ o otwartych źródłach
 Name:		codeblocks
-Version:	17.12
-Release:	1
+%define	snap	svn13361
+Version:	20.03
+Release:	1.%{snap}.1
 License:	GPL v3
 Group:		X11/Development/Tools
-Source0:	http://download.sourceforge.net/codeblocks/%{name}_%{version}.tar.xz
-# Source0-md5:	e7fb4fcf099fffe944b48af113944a81
+#Source0:	http://download.sourceforge.net/codeblocks/%{name}-%{version}%{snap}.tar.xz
+Source0:	%{name}-%{version}%{snap}.tar.xz
+# Source0-md5:	4f856967ec38135cebc09adc8db93294
 Patch0:		%{name}-FHS-plugins.patch
+Patch1:		no-parallel.patch
 Patch2:		%{name}-ac.patch
-Patch3:		%{name}-pwd.patch
-Patch4:		%{name}-astyle-3.1.patch
 URL:		http://www.codeblocks.org/
 BuildRequires:	astyle-devel >= 3.0
 BuildRequires:	autoconf >= 2.50
@@ -145,11 +146,10 @@ Ten pakiet dostarcza plików nagłówkowych Code::Blocks. Należy
 instalować ten pakiet tylko w celu pisania wtyczek do Code::Blocks.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}%{snap}
 %patch0 -p1
+%patch1 -p1
 %patch2 -p1
-%patch3 -p1
-%patch4 -p1
 
 # hardcode libdir, continue of patch0
 sed -i 's|@libdir@|%{_libdir}|' src/sdk/configmanager.cpp
@@ -163,7 +163,7 @@ sed -i 's/svn[0-9]\+//g' revision.m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-CXXFLAGS="%{rpmcxxflags} -std=c++11"
+#CXXFLAGS="%{rpmcxxflags} -std=c++11"
 %configure \
 	--with-boost-system=boost_system \
 	--with-contrib-plugins=all \
@@ -217,8 +217,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/codeblocks.desktop
 %{_pixmapsdir}/codeblocks.png
 %{_iconsdir}/hicolor/48x48/mimetypes/application-x-codeblocks*.png
-%{_datadir}/appdata/codeblocks.appdata.xml
-%{_datadir}/appdata/codeblocks-contrib.metainfo.xml
+%{_metainfodir}/codeblocks.appdata.xml
+%{_metainfodir}/codeblocks-contrib.metainfo.xml
 %{_datadir}/mime/packages/codeblocks.xml
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/scripts
